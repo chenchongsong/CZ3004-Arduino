@@ -2,17 +2,25 @@
 
 void brake()
 {
-
-  md.setBrakes(380, 400);
-  // md.setBrakes(280, 350);
+  md.setSpeeds(0, 0);
+  for (int i = 200; i < 400; i += 50) {
+    md.setBrakes(i, i);
+    delay(10);
+  }
+  delay(10);
+  // md.setBrakes(380, 400);
 }
 
 void brakeFP()
 {
-  md.setM1Brake(360); //left
-  //delayMicroseconds(5000);
-  md.setM2Brake(380);
- // delay(50);
+  md.setSpeeds(0, 0);
+  for (int i = 200; i < 400; i += 50) {
+    md.setBrakes(i, i);
+    delay(10);
+  }
+  delay(10);
+  // md.setM1Brake(360); //left
+  // md.setM2Brake(380);
 }
 
 void forward(int blockstomove)
@@ -146,7 +154,7 @@ void rotateRight(double grid)
       powerLeft = power + correction;
 
       //Execute
-      md.setSpeeds(-1 * (int)(powerRight), -1 * (int)powerLeft);
+      md.setSpeeds(-1 * (int)(powerRight), 1 * (int)powerLeft);
     }
   }
   brake();
@@ -165,6 +173,8 @@ void rotateLeft(double grid)
 
   //Clear the current interupt variable
   resetEncoder();
+  // md.setSpeeds(0, 0);
+  // md.setBrakes(0, 0);
 
   double tickTarget = 384 * grid; //384
 
@@ -182,18 +192,20 @@ void rotateLeft(double grid)
     tickTarget = 386; 
     strght_trig = 0; 
   }
+  
+  // while (encoderPinLeftTicks < tickTarget && encoderPinRightTicks < tickTarget) {
+  //   md.setSpeeds((int)(powerRight), -(int)powerLeft);
+  // }
     
 
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget)
   {
-
     if (PID_left.Compute())
     {
-
       diffValue = rightLeftTicksDiff();
       powerRight = 0.9969 * power - correction; //0.92
       powerLeft = power + correction;
-      md.setSpeeds((int)(powerRight), (int)powerLeft);
+      md.setSpeeds((int)(powerRight), -(int)powerLeft);
     }
   }
   brake();
@@ -266,7 +278,7 @@ void goBackFP(int grid)
       powerRight = power - correction;
       powerLeft = power + correction;
 
-      md.setSpeeds((int)(powerRight)*0.98, -1 * (int)powerLeft);
+      md.setSpeeds((int)(powerRight)*-0.98, -1 * (int)powerLeft);
     }
   }
   brakeFP();

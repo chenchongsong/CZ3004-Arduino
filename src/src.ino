@@ -46,8 +46,8 @@ const int encoderPinLeft = 3;
 const int encoderPinRight = 11;
 
 //Interrupt
-volatile long encoderPinLeftTicks = 0;
-volatile long encoderPinRightTicks = 0;
+double encoderPinLeftTicks = 0;
+double encoderPinRightTicks = 0;
 
 DualVNH5019MotorShield md;
 
@@ -88,8 +88,8 @@ void setup() {
   //Pin Initialization
   pinMode(encoderPinLeft, INPUT);
   pinMode(encoderPinRight, INPUT);
-  digitalWrite(encoderPinLeft, LOW);
-  digitalWrite(encoderPinRight, LOW);
+  // digitalWrite(encoderPinLeft, LOW);
+  // digitalWrite(encoderPinRight, LOW);
   
   md.init();
   pinMode(irR1, INPUT);
@@ -98,14 +98,32 @@ void setup() {
   pinMode(irR4, INPUT);
   pinMode(irR5, INPUT);
   pinMode(irR6, INPUT);
-  
+
+  enableInterrupt(encoderPinLeft, ISREncoderLeft_CHANGE, RISING);
+  enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
 }
 
+
 void loop() {
-delay(1000);
-boolean enabled = false;
+delay(3000);
+
+// Serial.print("\nA3 = \n");
+// Serial.print(analogRead(A3));
+// Serial.print("\nA2 = \n");
+// Serial.print(analogRead(A2));
+// Serial.print("\nA5 = \n");
+// Serial.print(analogRead(A5));
+
+// md.setSpeeds(150, 150);
+boolean enabled = true;
 if (enabled) {
   rotateLeft(1);
+  delay(1000);
+  rotateRight(1);
+  delay(1000);
+  goStraightFP(1);
+  delay(1000);
+  goBackFP(1);
 }
 
 // put your main code here, to run repeatedly:

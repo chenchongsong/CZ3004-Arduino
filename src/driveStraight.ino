@@ -39,7 +39,7 @@ void goStraightEX()
        powerRight = 0.9969* power - correction; //
        powerLeft = 1 * power + correction;
        
-       md.setSpeeds(-1*(int)(powerRight), (int)powerLeft);
+       md.setSpeeds((int)(powerRight), (int)powerLeft);
               
       }
 //      Serial.print(powerLeft);Serial.print("\t");
@@ -111,7 +111,7 @@ void goStraightFP(int grid)
 //       Serial.println(powerLeft-powerRight);
 //      
       }
-       md.setSpeeds(-1*(int)(powerRight), (int)powerLeft);
+       md.setSpeeds((int)(powerRight), (int)powerLeft);
        
            
     }

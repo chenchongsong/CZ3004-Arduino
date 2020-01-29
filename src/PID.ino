@@ -2,12 +2,10 @@
 
 double rightLeftTicksDiff()
 {
-     
-   disableInterrupt(encoderPinLeft);
-   disableInterrupt(encoderPinRight);
+  disableInterrupt(encoderPinLeft);
+  disableInterrupt(encoderPinRight);
 
-   double ticksDifference = (encoderPinRightTicks - encoderPinLeftTicks)/1.0;
-   
+  double ticksDifference = (encoderPinRightTicks - encoderPinLeftTicks)/1.0;
    enableInterrupt(encoderPinLeft, ISREncoderLeft_CHANGE, RISING);
    enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
 
