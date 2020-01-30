@@ -19,9 +19,6 @@
 #define irR6 A5 
 
 
-// Salakau v.1
-
-
 /// PID constant variables
 
 double sampleTime = 100;
@@ -34,13 +31,12 @@ double kpStraightFP = 5; //2.8
 double kiStraightFP = 0.0; //0.02
 double kdStraightFP = 0.0;  //0.0
 
-double kpRight = 0.8; //0.8
-double kiRight = 0.5; //0.5
-double kdRight = 0.2;  //0.2
-
 double kpLeft = 0.7;
 double kiLeft = 0.5;
 double kdLeft = 0.2;
+double kpRight = kpLeft;
+double kiRight = kiLeft;
+double kdRight = kdLeft;
 
 const int encoderPinLeft = 3;
 const int encoderPinRight = 11;
@@ -79,11 +75,8 @@ int command;
 int strght_trig = 0;
 
 void setup() {
-  // put your setup code here, to run once:
-
-  
   //Debug
- // analogReference(EXTERNAL);
+  // analogReference(EXTERNAL);
   Serial.begin(9600);
   //Pin Initialization
   pinMode(encoderPinLeft, INPUT);
@@ -116,23 +109,23 @@ void loop() {
   // md.setSpeeds(150, 150);
   boolean enabled = true;
   if (enabled) {
-    rotateLeft(1);
-    delay(1000);
-    rotateLeft(1);
-    delay(6000);
-    rotateLeft(1);
-    delay(1000);
-    rotateLeft(1);
-    delay(1000);
-    // goStraightFP(2);
+    // rotateLeft(1);
     // delay(1000);
-    // goBackFP(2);
+    // rotateLeft(1);
+    // delay(6000);
+    // rotateRight(1);
+    // delay(1000);
+    // rotateRight(1);
+    // delay(1000);
+    goStraightFP(10);
+    delay(10000);
+    goBackFP(10);
   }
   delay(30000);
 
-// put your main code here, to run repeatedly:
-//  if (receiveCommand())
-//  {
-//    executeCommand();
-//  }
+  // // put your main code here, to run repeatedly:
+  // if (receiveCommand())
+  // {
+  //   executeCommand();
+  // }
 }

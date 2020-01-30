@@ -47,33 +47,27 @@ void goStraightEX()
 //       Serial.println(powerLeft-powerRight);
     }
     brake();
-
- 
 }
 
-void goStraightFP(int grid)
-{
-  double orientation = 0;
-  strght_trig++; 
+void goStraightFP(int grid) {
+  strght_trig++;
   
-  //Temporary variable for control system(power)
   double power = 380;
   double powerLeft = power;
   double powerRight = power;
   double diffValue = 0;
   double correction = 0;
-  
-  //Clear the current interupt variable
-  resetEncoder();
+  double orientation = 0;
+
+  resetEncoder(); // Clear Tick Counts
 
   //Distance
-   double distance = 0;
-  switch(grid)
-  {
+  double distance = 0;
+  switch(grid) {
     case 0: distance = 8; break;
     case 1: distance = 297.16; break;
-    case 2: distance = 586.68; break; //590.68
-    case 3: distance = 898.6; break; //
+    case 2: distance = 586.68; break;
+    case 3: distance = 898.6; break;
     case 4: distance = 1200.29; break;
     case 5: distance = 1505.56; break;
     case 6: distance = 1758.86; break;
@@ -87,34 +81,20 @@ void goStraightFP(int grid)
     case 14: distance = 4171.40; break;
     case 15: distance = 4450.41; break;
     case 16: distance = 4803.03; break;
-    default: distance = 304.8799 *grid; 
+    default: distance = 304.8799 * grid; 
   } 
   
-   //PID
-   PID PID_straightFP(&diffValue, &correction, &orientation, kpStraightFP, kiStraightFP, kdStraightFP, DIRECT);
-   PID_straightFP.SetMode(AUTOMATIC);
-   PID_straightFP.SetSampleTime(sampleTime / 2);
-
-   //Serial.println(readSensor(Mid_mid));
-   
-  while(((distance == -1|| (encoderPinLeftTicks + encoderPinRightTicks)/2 < distance)))  
-    {
-     if(PID_straightFP.Compute())
-     {
-       diffValue = rightLeftTicksDiff();
-
-       powerRight = power - correction;
-       powerLeft = power + correction;
-      
-//      Serial.print(powerLeft);Serial.print("\t");
-//       Serial.print(powerRight);Serial.print("\t");
-//       Serial.println(powerLeft-powerRight);
-//      
-      }
-       md.setSpeeds((int)(powerRight), (int)powerLeft);
-       
-           
+  PID PID_straightFP(&diffValue, &correction, &orientation, kpStraightFP, kiStraightFP, kdStraightFP, DIRECT);
+  PID_straightFP.SetMode(AUTOMATIC);
+  PID_straightFP.SetSampleTime(sampleTime / 2);
+ 
+  while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
+    if (PID_straightFP.Compute()) {
+      diffValue = rightLeftTicksDiff();
+      powerRight = power - correction;
+      powerLeft = 1.01 * power + correction;
     }
-    
-    brakeFP();
+    md.setSpeeds((int)powerRight, (int)powerLeft);
+  }
+  brakeFP();
 }

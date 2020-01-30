@@ -6,16 +6,20 @@ double rightLeftTicksDiff()
   disableInterrupt(encoderPinRight);
 
   double ticksDifference = (encoderPinRightTicks - encoderPinLeftTicks)/1.0;
-   enableInterrupt(encoderPinLeft, ISREncoderLeft_CHANGE, RISING);
-   enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
+  enableInterrupt(encoderPinLeft, ISREncoderLeft_CHANGE, RISING);
+  enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
 
-   return ticksDifference;
+  return ticksDifference;
 }
 
 void resetEncoder()
 {
-   encoderPinLeftTicks = 0;
-   encoderPinRightTicks = 0;
+  disableInterrupt(encoderPinLeft);
+  disableInterrupt(encoderPinRight);
+  encoderPinLeftTicks = 0;
+  encoderPinRightTicks = 0;
+  enableInterrupt(encoderPinLeft, ISREncoderLeft_CHANGE, RISING);
+  enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
 }
 
 void ISREncoderLeft_CHANGE()
