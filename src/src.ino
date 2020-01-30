@@ -105,26 +105,30 @@ void setup() {
 
 
 void loop() {
-delay(3000);
+  delay(3000);
+  // Serial.print("\nA3 = \n");
+  // Serial.print(analogRead(A3));
+  // Serial.print("\nA2 = \n");
+  // Serial.print(analogRead(A2));
+  // Serial.print("\nA5 = \n");
+  // Serial.print(analogRead(A5));
 
-// Serial.print("\nA3 = \n");
-// Serial.print(analogRead(A3));
-// Serial.print("\nA2 = \n");
-// Serial.print(analogRead(A2));
-// Serial.print("\nA5 = \n");
-// Serial.print(analogRead(A5));
-
-// md.setSpeeds(150, 150);
-boolean enabled = true;
-if (enabled) {
-  rotateLeft(1);
-  delay(1000);
-  rotateRight(1);
-  delay(1000);
-  goStraightFP(1);
-  delay(1000);
-  goBackFP(1);
-}
+  // md.setSpeeds(150, 150);
+  boolean enabled = true;
+  if (enabled) {
+    rotateLeft(1);
+    delay(1000);
+    rotateLeft(1);
+    delay(6000);
+    rotateLeft(1);
+    delay(1000);
+    rotateLeft(1);
+    delay(1000);
+    // goStraightFP(2);
+    // delay(1000);
+    // goBackFP(2);
+  }
+  delay(30000);
 
 // put your main code here, to run repeatedly:
 //  if (receiveCommand())

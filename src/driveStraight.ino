@@ -93,7 +93,7 @@ void goStraightFP(int grid)
    //PID
    PID PID_straightFP(&diffValue, &correction, &orientation, kpStraightFP, kiStraightFP, kdStraightFP, DIRECT);
    PID_straightFP.SetMode(AUTOMATIC);
-   PID_straightFP.SetSampleTime(sampleTime/2);
+   PID_straightFP.SetSampleTime(sampleTime / 2);
 
    //Serial.println(readSensor(Mid_mid));
    
@@ -103,8 +103,8 @@ void goStraightFP(int grid)
      {
        diffValue = rightLeftTicksDiff();
 
-       powerRight = 0.9969 * power - correction;
-      powerLeft = power + correction;
+       powerRight = power - correction;
+       powerLeft = power + correction;
       
 //      Serial.print(powerLeft);Serial.print("\t");
 //       Serial.print(powerRight);Serial.print("\t");
