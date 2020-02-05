@@ -8,49 +8,50 @@ int irsampleSize = 10;
 //Raw values to OFFSET
 // LEFT LONG 
 float readIR1() {
-  return 4 + 60.374 * pow(map(analogRead(irR1), 0, 1023, 0, 5000) / 1000.0, -1.16) -18.8;
+  return 4 + 60.374 * pow(map(analogRead(irR1), 0, 1023, 0, 5000) / 1000.0, -1.16) - 0;
 }// 5,10,18,27,37,53,70
 
 // FRONT LEFT
 float readIR2() {
-  return 27.728 * pow(map(analogRead(irR2), 0, 1023, 0, 5000) / 1000.0, -1.2045) -4;
+  return 27.728 * pow(map(analogRead(irR2), 0, 1023, 0, 5000) / 1000.0, -1.2045) -5.5;
 }//5,15,25,35
 
 // FRONT MIDDLE 
 float readIR3() {
-  return 27.728 * pow(map(analogRead(irR3), 0, 1023, 0, 5000) / 1000.0, -1.2045) -4.8;
+  return 27.728 * pow(map(analogRead(irR3), 0, 1023, 0, 5000) / 1000.0, -1.2045) -2.2;
 }//5,15,24,31
 
 // FRONT RIGHT
 float readIR4() {
-  return 27.728 * pow(map(analogRead(irR4), 0, 1023, 0, 5000) / 1000.0, -1.2045) -4.3;
+  return 27.728 * pow(map(analogRead(irR4), 0, 1023, 0, 5000) / 1000.0, -1.2045) -5.5;
 }//5,15,25,29
 
 // RIGHT FRONT SHORT
 float readIR5() {
-  return 27.728 * pow(map(analogRead(irR5), 0, 1023, 0, 5000) / 1000.0, -1.2045) -4.7;
+  return 27.728 * pow(map(analogRead(irR5), 0, 1023, 0, 5000) / 1000.0, -1.2045) -5.5;
 }//5,12,23,30
 
 // RIGHT MIDDLE SHORT
 float readIR6() {
-  return 27.728 * pow(map(analogRead(irR6), 0, 1023, 0, 5000) / 1000.0, -1.2045) -3;
+  return 27.728 * pow(map(analogRead(irR6), 0, 1023, 0, 5000) / 1000.0, -1.2045) -6.7;
 }//5,10,20,30
 
 void checkRawValues (){
  
-//  Serial.println("obs:"+String(readIR1())+"|"
-//                      +String(readIR2())+"|"
-//                      +String(readIR3())+"|"
-//                      +String(readIR4())+"|"
-//                      +String(readIR5())+"|"
-//                      +String(readIR6())
-//                 );
-        Serial.println("obs:"+String(median(irArr1,irsampleSize))+"|"
-                      +String(median(irArr2,irsampleSize))+"|"
-                      +String(median(irArr3,irsampleSize))+"|"
-                      +String(median(irArr4,irsampleSize))+"|"
-                      +String(median(irArr5,irsampleSize))+"|"
-                      +String(median(irArr6,irsampleSize)));
+ Serial.println("obs:"+String(readIR1())+"|"
+                     //+String(readIR2())+"|"
+                     //+String(readIR3())+"|"
+                     //+String(readIR4())+"| avg: "
+                     //+String((readIR2() + readIR3() + readIR4()) / 3.)
+                    //  +String(readIR5())+"|"
+                    //  +String(readIR6())
+                );
+        // Serial.println("obs:"+String(median(irArr1,irsampleSize))+"|"
+        //               +String(median(irArr2,irsampleSize))+"|"
+        //               +String(median(irArr3,irsampleSize))+"|"
+        //               +String(median(irArr4,irsampleSize))+"|"
+        //               +String(median(irArr5,irsampleSize))+"|"
+        //               +String(median(irArr6,irsampleSize)));
   }
 
 
