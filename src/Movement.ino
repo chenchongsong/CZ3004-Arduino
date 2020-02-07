@@ -9,6 +9,17 @@ void brake() {
   // md.setBrakes(380, 400);
 }
 
+void brakeEX() {
+  md.setSpeeds(0, 0);
+  for (int i = 200; i < 400; i += 50) {
+    md.setBrakes(i, i);
+    delay(10);
+  }
+  delay(10);
+  // md.setM1Brake(360); //left
+  // md.setM2Brake(380);
+}
+
 void brakeFP() {
   md.setSpeeds(0, 0);
   for (int i = 200; i < 400; i += 50) {
@@ -21,7 +32,7 @@ void brakeFP() {
 }
 
 void rotateRight(double grid) {
-  double power = 300;
+  double power = 250;
   double powerLeft = power;
   double powerRight = power;
   double diffValue = 0;
@@ -29,7 +40,7 @@ void rotateRight(double grid) {
   double orientation = 0;
 
   resetEncoder(); // Clear Tick Counts
-  double tickTarget = 371 * grid;
+  double tickTarget = 400 * grid;
 
   PID PID_right(&diffValue, &correction, &orientation, kpRight, kiRight, kdRight, DIRECT);
   PID_right.SetMode(AUTOMATIC);
@@ -38,8 +49,8 @@ void rotateRight(double grid) {
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget) {
     if (PID_right.Compute()) {
       diffValue = rightLeftTicksDiff();
-      powerRight = power - correction; 
-      powerLeft = 0.915 * power + correction;
+      powerRight = 1.05 * power - correction; 
+      powerLeft = 0.900 * power + correction;
       md.setSpeeds(-(int)powerRight, (int)powerLeft);
     }
   }
@@ -56,7 +67,7 @@ void rotateLeft(double grid) {
   double correction = 0;
 
   resetEncoder(); // Clear Tick Counts
-  double tickTarget = 371 * grid;
+  double tickTarget = 401 * grid; //371
 
   PID PID_left(&diffValue, &correction, &orientation, kpLeft, kiLeft, kdLeft, DIRECT);
   PID_left.SetMode(AUTOMATIC);
@@ -66,7 +77,7 @@ void rotateLeft(double grid) {
     if (PID_left.Compute()) {
       diffValue = rightLeftTicksDiff();
       powerRight = power - correction;
-      powerLeft = 0.915 * power + correction;
+      powerLeft =  power + correction;
       md.setSpeeds((int)powerRight, -(int)powerLeft);
     }
   }

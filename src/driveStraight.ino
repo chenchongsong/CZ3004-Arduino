@@ -4,7 +4,7 @@ void goStraightEX()
   strght_trig++;
   
   //Temporary variable for control system(power)
-  double power = 400;//300
+  double power = 250;//300
   double powerLeft = power; //default = 250
   double powerRight = power;
   double diffValue = 0;
@@ -36,17 +36,17 @@ void goStraightEX()
      {
        diffValue = rightLeftTicksDiff();
 
-       powerRight = 0.9969* power - correction; //
-       powerLeft = 1 * power + correction;
+       powerRight = 1.09 * power - correction; //oulseInlong(3,HIGH)
+       powerLeft = 1.091* power + correction;
        
        md.setSpeeds((int)(powerRight), (int)powerLeft);
               
       }
-//      Serial.print(powerLeft);Serial.print("\t");
-//       Serial.print(powerRight);Serial.print("\t");
-//       Serial.println(powerLeft-powerRight);
+      // Serial.print(powerLeft);Serial.print("\t");
+      //  Serial.print(powerRight);Serial.print("\t");
+      //  Serial.println(powerLeft-powerRight);
     }
-    brake();
+    brakeEX();
 }
 
 void goStraightFP(int grid) {
@@ -92,7 +92,7 @@ void goStraightFP(int grid) {
     if (PID_straightFP.Compute()) {
       diffValue = rightLeftTicksDiff();
       powerRight = power - correction;
-      powerLeft = 1.01 * power + correction;
+      powerLeft = 1.10 * power + correction;
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
   }
