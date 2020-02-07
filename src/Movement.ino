@@ -11,24 +11,14 @@ void brake() {
 
 void brakeEX() {
   md.setSpeeds(0, 0);
-  for (int i = 200; i < 400; i += 50) {
-    md.setBrakes(i, i);
-    delay(10);
-  }
-  delay(10);
-  // md.setM1Brake(360); //left
-  // md.setM2Brake(380);
+  md.setM1Brake(360);
+  md.setM2Brake(380);
 }
 
 void brakeFP() {
   md.setSpeeds(0, 0);
-  for (int i = 200; i < 400; i += 50) {
-    md.setBrakes(i, i);
-    delay(10);
-  }
-  delay(10);
-  // md.setM1Brake(360); //left
-  // md.setM2Brake(380);
+  md.setM1Brake(360);
+  md.setM2Brake(380);
 }
 
 void rotateRight(double grid) {
@@ -48,7 +38,7 @@ void rotateRight(double grid) {
 
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget) {
     if (PID_right.Compute()) {
-      diffValue = rightLeftTicksDiff();
+      diffValue = leftRightTicksDiff();
       powerRight = 1.05 * power - correction; 
       powerLeft = 0.900 * power + correction;
       md.setSpeeds(-(int)powerRight, (int)powerLeft);
@@ -75,7 +65,7 @@ void rotateLeft(double grid) {
 
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget) {
     if (PID_left.Compute()) {
-      diffValue = rightLeftTicksDiff();
+      diffValue = leftRightTicksDiff();
       powerRight = power - correction;
       powerLeft =  power + correction;
       md.setSpeeds((int)powerRight, -(int)powerLeft);
@@ -120,14 +110,12 @@ void goBackFP(int grid) {
   PID PID_backFP(&diffValue, &correction, &orientation, kpStraightFP, kiStraightFP, kdStraightFP, DIRECT);
   PID_backFP.SetMode(AUTOMATIC);
   PID_backFP.SetSampleTime(sampleTime / 2);
-  //PID_backFP.SetOutputLimits(-1000, 1000);
-  //Serial.println(readSensor(Mid_mid));
 
   while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
     if (PID_backFP.Compute()) {
-      diffValue = rightLeftTicksDiff();
+      diffValue = leftRightTicksDiff();
       powerRight = power - correction;
-      powerLeft = 1.01 * power + correction;
+      powerLeft = power + correction;
       md.setSpeeds(-(int)powerRight, -(int)powerLeft);
     }
   }

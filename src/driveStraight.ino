@@ -1,11 +1,10 @@
-void goStraightEX()
-{
+void goStraightEX() {
   double orientation = 0; 
   strght_trig++;
   
   //Temporary variable for control system(power)
-  double power = 250;//300
-  double powerLeft = power; //default = 250
+  double power = 250;
+  double powerLeft = power; 
   double powerRight = power;
   double diffValue = 0;
   double correction = 0;
@@ -14,39 +13,32 @@ void goStraightEX()
   resetEncoder();
 
   //Distance
-   double distance = 270; //258  //285.5 // 274
+   double distance = 270;
   
    //PID
    PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
    PID_straightEX.SetMode(AUTOMATIC);
-   PID_straightEX.SetSampleTime(sampleTime/2);
+   PID_straightEX.SetSampleTime(sampleTime / 2);
 
   int irsampleSize = 10;
   irSamples(irsampleSize);
   float block_dis = 4.5;
-  
-   
   while((distance == -1|| (encoderPinLeftTicks + encoderPinRightTicks)/2 < distance)
 //        && (median(irArr2, irsampleSize)>block_dis && 
 //   median(irArr3, irsampleSize)>block_dis && 
 //   median(irArr4, irsampleSize)>block_dis)
         )
   {
-     if(PID_straightEX.Compute())
-     {
-       diffValue = rightLeftTicksDiff();
-
-       powerRight = 1.09 * power - correction; //oulseInlong(3,HIGH)
-       powerLeft = 1.091* power + correction;
-       
-       md.setSpeeds((int)(powerRight), (int)powerLeft);
-              
-      }
-      // Serial.print(powerLeft);Serial.print("\t");
-      //  Serial.print(powerRight);Serial.print("\t");
-      //  Serial.println(powerLeft-powerRight);
+    if (PID_straightEX.Compute()) {
+      diffValue = leftRightTicksDiff();
+      powerRight = power - correction;
+      powerLeft = power + correction;
     }
-    brakeEX();
+    md.setSpeeds((int)powerRight, (int)powerLeft);
+    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+  }
+  brakeEX();
 }
 
 void goStraightFP(int grid) {
@@ -90,11 +82,13 @@ void goStraightFP(int grid) {
  
   while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
     if (PID_straightFP.Compute()) {
-      diffValue = rightLeftTicksDiff();
+      diffValue = leftRightTicksDiff();
       powerRight = power - correction;
-      powerLeft = 1.10 * power + correction;
+      powerLeft = power + correction;
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
+    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeFP();
 }

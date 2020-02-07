@@ -23,13 +23,13 @@
 
 double sampleTime = 100;
 
-double kpStraightEX = 1.88; //1.68; //1.3 
-double kiStraightEX = 0.2; //0.2; //1,2 for straight  
-double kdStraightEX = 0.7; //0.6; //0.5
+double kpStraightEX = 0.5; //1.68; //1.3 
+double kiStraightEX = 0.0; //0.2;
+double kdStraightEX = 0.0; //0.6; //0.5
 
-double kpStraightFP = 5; //2.8
-double kiStraightFP = 0.0; //0.02
-double kdStraightFP = 0.0;  //0.0
+double kpStraightFP = 2.5; //2.8
+double kiStraightFP = 0.0;
+double kdStraightFP = 0.0;
 
 double kpLeft = 0.7;
 double kiLeft = 0.5;
@@ -98,7 +98,7 @@ void setup() {
 
 
 void loop() {
-  // delay(2500);
+  delay(2500);
   //checkRawValues();
   // Serial.println(irArr1);
   // Serial.println("irR2");
@@ -122,22 +122,28 @@ void loop() {
   //   rotateRight(1);
   //   // delay(1000);
   //   // rotateRight(1);
-  //   // delay(1000);
-  // goStraightFP(5);
-  //   // delay(10000);
-  //   // goBackFP(10);
-  // }
-    goStraightEX();
+
+  Serial.println("OK");
+  // goStraightFP(10);
+  // delay(10000);
+  // goBackFP(10);
+  // delay(10000);
+
+  goStraightEX();
+  // delay(1000);
    
-    //  rotateLeft(8); //1 = 90deg, 4 = 360deg, 8 = 720deg, 12 = 1080 deg
-    // rotateRight(4);
-    // delay(200);
-    // rotateRight(4);
-    //  delay(1000);
-    // md.setSpeeds(250,250);
-    Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    delay(1000);
-  
+  // rotateLeft(8); //1 = 90deg, 4 = 360deg, 8 = 720deg, 12 = 1080 deg
+  // rotateRight(4);
+  // delay(200);
+  // rotateRight(4);
+
+  // md.setSpeeds(250, 0);
+  // for (uint8_t i = 0; i < 3; i++) {
+  //   Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  //   delay(20);
+  // }
+
+  Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
 
   // // put your main code here, to run repeatedly:
   // if (receiveCommand())
