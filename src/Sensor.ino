@@ -23,22 +23,22 @@ float readIR3() {
 
 // FRONT RIGHT
 float readIR4() {
-  return 27.728 * pow(map(analogRead(irR4), 0, 1023, 0, 5000) / 1000.0, -1.2045) -5.5;
+  return 27.728 * pow(map(analogRead(irR4), 0, 1023, 0, 5000) / 1000.0, -1.2045) -6.5;
 }//5,15,25,29
 
-// RIGHT FRONT SHORT
+// LEFT
 float readIR5() {
   return 27.728 * pow(map(analogRead(irR5), 0, 1023, 0, 5000) / 1000.0, -1.2045) -5.5;
 }//5,12,23,30
 
-// RIGHT MIDDLE SHORT
+// RIGHT
 float readIR6() {
-  return 27.728 * pow(map(analogRead(irR6), 0, 1023, 0, 5000) / 1000.0, -1.2045) -6.7;
+  return 27.728 * pow(map(analogRead(irR6), 0, 1023, 0, 5000) / 1000.0, -1.2045) -6.5;
 }//5,10,20,30
 
 void checkRawValues (){
- 
- Serial.println("obs:"+String(readIR1())+"|"
+ float tmp = readIR1();
+ Serial.println("obs:"+String(tmp)+"|"+String(estLong(tmp))
                      //+String(readIR2())+"|"
                      //+String(readIR3())+"|"
                      //+String(readIR4())+"| avg: "
@@ -54,9 +54,6 @@ void checkRawValues (){
         //               +String(median(irArr6,irsampleSize)));
   }
 
-
-
-
 //collects samples for ir Array
 void irSamples(int maxnum) {
   for (int i = 0; i < maxnum; i++) {
@@ -68,13 +65,7 @@ void irSamples(int maxnum) {
     irArr6[i] = readIR6();
     delay(2);
   }
-
-  
 }
-
-
-
-
 
 float median(float nums[], int n) {
   int k = n % 2 == 0 ? n / 2 : n / 2 + 1;
@@ -121,11 +112,8 @@ float qselect(float A[], int start, int end, int k) {
 
 void sendIRtoPC() {
   irSamples(irsampleSize);
-//to check raw values
-//checkRawValues();
 
   // filtered reading to return in grids
-
   //automated front calibration
 //  if((estShort(median(irArr2, 50))<4 && estShortFR(median(irArr4, irsampleSize))<4) 
 //    ||(estShort(median(irArr2, 50))<4 && estShortFM(median(irArr3, irsampleSize))<4)
@@ -148,84 +136,55 @@ float block_dis = 9.5;
 //  (median(irArr5, irsampleSize)) == 17.5
 //  ) caliRight();
 
- 
- 
   Serial.println("obs:" + String(estLong(median(irArr1, irsampleSize))) + "|"
-                 + String(estShort(median(irArr2, irsampleSize))) + "|"
+                 + String(estShortFL(median(irArr2, irsampleSize))) + "|"
                  + String(estShortFM(median(irArr3, irsampleSize))) + "|"
                  + String(estShortFR(median(irArr4, irsampleSize))) + "|"
-                 + String(estShort(median(irArr5, irsampleSize))) + "|"
-                 + String(estShort(median(irArr6, irsampleSize)))
+                 + String(estShortLeft(median(irArr5, irsampleSize))) + "|"
+                 + String(estShortRight(median(irArr6, irsampleSize)))
                 );
 }
 
-
-
-int estShort(float reading) {
-  if (reading < 9.5) {
-    return 1; 
-  }
-  else if (reading < 19) {
-    return 2; 
-  }
-  else if (reading <= 30) {
-    return 3;  
-  }
-  else {
-    return 0;
-  }
+int estShortFL(float reading) {
+  if (reading < 9.5) return 0;
+  if (reading < 20.5) return 1;
+  if (reading <= 33) return 2; 
+  return 3;  // 3 grids free or above
 }
 
 int estShortFM(float reading) {
-  if (reading < 7.2 ) {
-    return 1; 
-  }
-  else if (reading < 19 ) {
-    return 2; 
-  }
-  else if (reading <= 36) {
-    return 3;  
-  }
-  else {
-    return 0;
-  }
+  if (reading < 9.5) return 0;
+  if (reading < 20.5) return 1;
+  if (reading <= 33) return 2; 
+  return 3;  // 3 grids free or above
 }
 
 int estShortFR(float reading) {
-  if (reading < 9.5 ) {
-    return 1; 
-  }
-  else if (reading < 19) {
-    return 2; 
-    
-  }
-  else if (reading <= 27.1) {
-    return 3;  
-  }
-  else {
-    return 0;
-  }
+  if (reading < 9.5) return 0;
+  if (reading < 21.5) return 1;
+  if (reading <= 33) return 2;
+  return 3;  // 3 grids free or above
 }
 
+int estShortLeft(float reading) {
+  if (reading < 9.5) return 0;
+  if (reading < 21.3) return 1;
+  if (reading <= 34) return 2; 
+  return 3;  // 3 grids free or above
+}
 
-// 5,10,18,27,37,53,70
+int estShortRight(float reading) {
+  if (reading < 9.5) return 0;
+  if (reading < 21.5) return 1;
+  if (reading <= 33.5) return 2; 
+  return 3;  // 3 grids free or above
+}
+
 int estLong(float reading) {
-  if (reading <7.2 ) {
-    return 1; 
-  }
-  else if (reading < 16) {
-    return 2; 
-  }
-  else if (reading < 24.5) {
-    return 3; 
-  }
-  else if (reading < 31.5) {
-    return 4; 
-  }
-   else if (reading < 61) {
-    return 5; 
-  }
-  else {
-    return 0;
-  }
+  // if (reading < 24.4) return 0;
+  if (reading < 26) return 1;
+  if (reading < 33.5) return 2;
+  if (reading < 43.5) return 3;
+  if (reading < 54) return 4;
+  return 5;  // 5 grids or more
 }

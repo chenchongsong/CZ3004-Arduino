@@ -5,22 +5,18 @@
 #include "EnableInterrupt.h"
 #include "SharpIR.h"
 
-
-
-
 #define M1E1Right 3
 #define M2E2Left 13
 
-#define irR1 A0 
-#define irR2 A1 
-#define irR3 A2 
-#define irR4 A3 
-#define irR5 A4 
-#define irR6 A5 
+#define irR1 A0
+#define irR2 A1
+#define irR3 A2
+#define irR4 A3
+#define irR5 A4
+#define irR6 A5
 
 
 /// PID constant variables
-
 double sampleTime = 100;
 
 double kpStraightEX = 0.5; //1.68; //1.3 
@@ -98,8 +94,8 @@ void setup() {
 
 
 void loop() {
-  delay(2500);
-  //checkRawValues();
+  delay(1000);
+  checkRawValues();
   // Serial.println(irArr1);
   // Serial.println("irR2");
   // Serial.println(analogRead(irR2));
@@ -112,24 +108,13 @@ void loop() {
   // Serial.print("\nA5 = \n");
   // Serial.print(analogRead(A5));
 
-
-  // boolean enabled = true;
-  // if (enabled) {
-  //   rotateLeft(1);
-  //   delay(1000);
-  //   // rotateLeft(1);
-  //   // delay(6000);
-  //   rotateRight(1);
-  //   // delay(1000);
-  //   // rotateRight(1);
-
-  Serial.println("OK");
+  // Serial.println("OK");
   // goStraightFP(10);
   // delay(10000);
   // goBackFP(10);
   // delay(10000);
 
-  goStraightEX();
+  // goStraightEX();
   // delay(1000);
    
   // rotateLeft(8); //1 = 90deg, 4 = 360deg, 8 = 720deg, 12 = 1080 deg
@@ -137,13 +122,7 @@ void loop() {
   // delay(200);
   // rotateRight(4);
 
-  // md.setSpeeds(250, 0);
-  // for (uint8_t i = 0; i < 3; i++) {
-  //   Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  //   delay(20);
-  // }
-
-  Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
 
   // // put your main code here, to run repeatedly:
   // if (receiveCommand())
