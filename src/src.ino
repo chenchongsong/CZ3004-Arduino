@@ -19,7 +19,7 @@
 /// PID constant variables
 double sampleTime = 100;
 
-double kpStraightEX = 0.5; //1.68; //1.3 
+double kpStraightEX = 0.3; // larger -> left_tick larger -> turn right
 double kiStraightEX = 0.0; //0.2;
 double kdStraightEX = 0.0; //0.6; //0.5
 
@@ -28,8 +28,8 @@ double kiStraightFP = 0.0;
 double kdStraightFP = 0.0;
 
 double kpLeft = 0.7;
-double kiLeft = 0.5;
-double kdLeft = 0.2;
+double kiLeft = 0.0;
+double kdLeft = 0;
 double kpRight = kpLeft;
 double kiRight = kiLeft;
 double kdRight = kdLeft;
@@ -94,8 +94,10 @@ void setup() {
 
 
 void loop() {
-  delay(1000);
-  checkRawValues();
+  delay(5000);
+  // Serial.println("pi");
+
+  // checkRawValues();
   // Serial.println(irArr1);
   // Serial.println("irR2");
   // Serial.println(analogRead(irR2));
@@ -109,10 +111,11 @@ void loop() {
   // Serial.print(analogRead(A5));
 
   // Serial.println("OK");
-  // goStraightFP(10);
+  // goStraightFP(5);
   // delay(10000);
-  // goBackFP(10);
-  // delay(10000);
+  // goBackFP(5);
+  // delay(200);
+  rotateRight(1);
 
   // goStraightEX();
   // delay(1000);
@@ -124,7 +127,7 @@ void loop() {
 
   // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
 
-  // // put your main code here, to run repeatedly:
+  // put your main code here, to run repeatedly:
   // if (receiveCommand())
   // {
   //   executeCommand();

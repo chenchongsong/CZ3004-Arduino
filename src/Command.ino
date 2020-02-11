@@ -1,12 +1,11 @@
 boolean receiveCommand() {
-
-  if (Serial.available() > 0 ) {
-    command = Serial.read();
-
-    if (command != 10  ) {
-      return true;
-    }
+  if (Serial.available() > 0) {
+    Serial.println("received:");
+    command = Serial.read(); // int
+    Serial.println("received: " + String((char)command));
+    return true;
   }
+  Serial.println("nothing received:");
   return false;
 }
 
