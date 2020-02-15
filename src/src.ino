@@ -15,7 +15,6 @@
 #define irR5 A4
 #define irR6 A5
 
-
 /// PID constant variables
 double sampleTime = 100;
 
@@ -92,44 +91,8 @@ void setup() {
   enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
 }
 
-
 void loop() {
-  delay(5000);
-  // Serial.println("pi");
-
-  // checkRawValues();
-  // Serial.println(irArr1);
-  // Serial.println("irR2");
-  // Serial.println(analogRead(irR2));
-  // Serial.println("irR3");
-  // Serial.println(analogRead(irR3));
-  // Serial.print("\nA3 = \n");
-  // Serial.print(analogRead(A3));
-  // Serial.print("\nA2 = \n");
-  // Serial.print(analogRead(A2));
-  // Serial.print("\nA5 = \n");
-  // Serial.print(analogRead(A5));
-
-  // Serial.println("OK");
-  // goStraightFP(5);
-  // delay(10000);
-  // goBackFP(5);
-  // delay(200);
-  rotateRight(1);
-
-  // goStraightEX();
-  // delay(1000);
-   
-  // rotateLeft(8); //1 = 90deg, 4 = 360deg, 8 = 720deg, 12 = 1080 deg
-  // rotateRight(4);
-  // delay(200);
-  // rotateRight(4);
-
-  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-
-  // put your main code here, to run repeatedly:
-  // if (receiveCommand())
-  // {
-  //   executeCommand();
-  // }
+  if (receiveCommand()) {
+    executeCommand();
+  }
 }

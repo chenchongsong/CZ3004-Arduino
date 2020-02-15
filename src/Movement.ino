@@ -53,14 +53,14 @@ void rotateLeft(int grid) {
       }
       md.setSpeeds((int)powerRight, -(int)powerLeft);
     }
-    Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brake();
-  Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  diffValue = leftRightTicksDiff();
-  Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
-  Serial.println("OK");
+  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  // diffValue = leftRightTicksDiff();
+  // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+  // Serial.println("OK");
 }
 
 void rotateRight(double grid) {
@@ -95,14 +95,14 @@ void rotateRight(double grid) {
       }
       md.setSpeeds((int)-powerRight, (int)powerLeft);
     }
-    Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brake();
-  Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  diffValue = leftRightTicksDiff();
-  Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
-  Serial.println("OK");
+  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  // diffValue = leftRightTicksDiff();
+  // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+  // Serial.println("OK");
 }
 
 void goBackFP(int grid) {
