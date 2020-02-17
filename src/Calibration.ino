@@ -1,23 +1,23 @@
-void caliRight() {
-  bool tried_left = false;
-  bool tried_right = false;
-  int cRsamples = 7;
-  irSamples(cRsamples);
-  float ir_diff = (median(irArr5,7)) - median(irArr6,7);
+// void caliRight() {
+//   bool tried_left = false;
+//   bool tried_right = false;
+//   int cRsamples = 7;
+//   irSamples(cRsamples);
+//   float ir_diff = (median(irArr5,7)) - median(irArr6,7);
 
-  while (abs(ir_diff) > 0.4 && not(tried_left && tried_right)) {
-    if (ir_diff < 0.4) {
-      rotateLeft(0);
-      tried_left = true;
-    }
-    else if (ir_diff > 0.4) {
-      rotateRight(0);
-      tried_right = true;
-    }
-    irSamples(cRsamples);
-    ir_diff = (median(irArr5,7)) - median(irArr6,7);
-  }
-}
+//   while (abs(ir_diff) > 0.4 && not(tried_left && tried_right)) {
+//     if (ir_diff < 0.4) {
+//       rotateLeft(0);
+//       tried_left = true;
+//     }
+//     else if (ir_diff > 0.4) {
+//       rotateRight(0);
+//       tried_right = true;
+//     }
+//     irSamples(cRsamples);
+//     ir_diff = (median(irArr5,7)) - median(irArr6,7);
+//   }
+// }
 
 void caliDistance() {
   bool tried_front = false;
@@ -49,7 +49,7 @@ void caliFront() {
   //make robot parallel
   int cFsamples = 7;
   irSamples(cFsamples);
-  float ir_diff = median(irArr2,cFsamples) - median(irArr4,cFsamples);
+  float ir_diff = median(irArr2, cFsamples) - median(irArr4, cFsamples);
   bool tried_left = false;
   bool tried_right = false;
 
@@ -69,14 +69,7 @@ void caliFront() {
 }
 
 void caliAngle() {
-  caliRight();
-
-  rotateRight(1);
   caliFront();
-
-  rotateLeft(1);
   caliDistance();
-  caliRight();
-
   Serial.println("cali:done");
 }

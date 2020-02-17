@@ -8,15 +8,18 @@ boolean receiveCommand() {
 }
 
 void executeCommand() {
-  if (command == 'l') { // rotate left - J
+  if (command == 'l') {
     rotateLeft(1);
-    // sendIRtoPC();
-  } else if (command == 'r') { // rotate right - L
+  } else if (command == 'r') {
     rotateRight(1);
-    // sendIRtoPC();
   } else if (command == 'f') {
     goStraightFP(1);
-    // sendIRtoPC();
+  } else if (command == 'b') {
+    goBackFP(1);
+  } else if (command == 'c') {
+    caliAngle();
+  } else if (command == 's') {
+    sendIRtoPC();
   }
   Serial.flush();
 }
