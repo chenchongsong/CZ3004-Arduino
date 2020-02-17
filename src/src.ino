@@ -113,12 +113,10 @@ void loop() {
  
   int irsampleSize = 10;
   irSamples(irsampleSize);
-  float block_dis = 4.5;
+  float block_dis = 15;
 
   while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance 
-    && median(irArr2, irsampleSize) > block_dis
-    && median(irArr3, irsampleSize) > block_dis
-    && median(irArr4, irsampleSize) > block_dis) {
+    && median(irArr3, irsampleSize) > block_dis) {
     if (PID_straightFP.Compute()) {
       diffValue = leftRightTicksDiff();
       powerRight = power - correction;
@@ -129,9 +127,7 @@ void loop() {
   }
   brakeFP();
 
-  if ( median(irArr2, irsampleSize) > block_dis
-    && median(irArr3, irsampleSize) > block_dis
-    && median(irArr4, irsampleSize) > block_dis) {
+  if ( median(irArr3, irsampleSize) > block_dis) {
     delay(30000); // stop
   }
 

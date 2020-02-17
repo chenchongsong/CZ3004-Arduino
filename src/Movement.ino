@@ -36,7 +36,7 @@ void rotateLeft(double grid) {
   } else if (grid == 2) {
     tickTarget = 815;
   } else {
-    
+    tickTarget = 405 * grid;
   }
 
   PID PID_left(&diffValue, &correction, &orientation, kpLeft, kiLeft, kdLeft, DIRECT);
@@ -79,6 +79,8 @@ void rotateRight(double grid) {
     tickTarget = 405;
   } else if (grid == 2) {
     tickTarget = 815;
+  } else {
+    tickTarget = 405 * grid;
   }
 
   PID PID_right(&diffValue, &correction, &orientation, kpRight, kiRight, kdRight, DIRECT);
