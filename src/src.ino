@@ -142,14 +142,12 @@ void loop() {
   enableInterrupt(encoderPinLeft, ISREncoderLeft_CHANGE, RISING);
   enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
 
-  rotateLeft(1);
-  goStraightFP(3);
+  rotateLeft(0.5);
+  goStraightFP(3 * 1.414);
   rotateRight(1);
-  goStraightFP(4); // 4 grids
-  distance = 3266.43; // 11 grids
-  rotateRight(1);
-  goStraightFP(3);
-  rotateLeft(1);
+  goStraightFP(3 * 1.414);
+  distance = 2665.76; // 9 grids
+  rotateLeft(0.5);
 
   // restore
   disableInterrupt(encoderPinLeft);

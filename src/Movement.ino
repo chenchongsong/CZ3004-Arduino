@@ -21,7 +21,7 @@ void brakeFP() {
   md.setM2Brake(380);
 }
 
-void rotateLeft(int grid) {
+void rotateLeft(double grid) {
   double power = 300;
   double powerLeft = power;
   double powerRight = power;
@@ -35,6 +35,8 @@ void rotateLeft(int grid) {
     tickTarget = 405;
   } else if (grid == 2) {
     tickTarget = 815;
+  } else {
+    
   }
 
   PID PID_left(&diffValue, &correction, &orientation, kpLeft, kiLeft, kdLeft, DIRECT);
