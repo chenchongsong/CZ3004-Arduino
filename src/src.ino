@@ -92,7 +92,75 @@ void setup() {
 }
 
 void loop() {
-  if (receiveCommand()) {
-    executeCommand();
+  delay(3000);
+  
+  double power = 250;
+  double powerLeft = power;
+  double powerRight = power;
+  double diffValue = 0;
+  double correction = 0;
+  double orientation = 0;
+
+  resetEncoder(); // Clear Tick Counts
+
+  double distance = 1758.86;; // 6 grids
+  double tmpLeftTicks = 0;
+  double tmpRightTicks = 0;
+  
+  PID PID_straightFP(&diffValue, &correction, &orientation, kpStraightFP, kiStraightFP, kdStraightFP, DIRECT);
+  PID_straightFP.SetMode(AUTOMATIC);
+  PID_straightFP.SetSampleTime(sampleTime / 2);
+ 
+  int irsampleSize = 10;
+  irSamples(irsampleSize);
+  float block_dis = 4.5;
+
+  while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance 
+    && median(irArr2, irsampleSize) > block_dis
+    && median(irArr3, irsampleSize) > block_dis
+    && median(irArr4, irsampleSize) > block_dis) {
+    if (PID_straightFP.Compute()) {
+      diffValue = leftRightTicksDiff();
+      powerRight = power - correction;
+      powerLeft = power + correction;
+    }
+    md.setSpeeds((int)powerRight, (int)powerLeft);
+    irSamples(irsampleSize);
   }
+  brakeFP();
+
+  disableInterrupt(encoderPinLeft);
+  disableInterrupt(encoderPinRight);
+  tmpLeftTicks = encoderPinLeftTicks;
+  tmpRightTicks = encoderPinRightTicks;
+  enableInterrupt(encoderPinLeft, ISREncoderLeft_CHANGE, RISING);
+  enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
+
+  rotateLeft(1);
+  goStraightFP(3);
+  rotateRight(1);
+  goStraightFP(4);
+  rotateRight(1);
+  goStraightFP(3);
+  rotateLeft(1);
+
+  // restore
+  disableInterrupt(encoderPinLeft);
+  disableInterrupt(encoderPinRight);
+  encoderPinLeftTicks = tmpLeftTicks;
+  encoderPinRightTicks = tmpRightTicks;
+  enableInterrupt(encoderPinLeft, ISREncoderLeft_CHANGE, RISING);
+  enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
+
+  while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
+    if (PID_straightFP.Compute()) {
+      diffValue = leftRightTicksDiff();
+      powerRight = power - correction;
+      powerLeft = power + correction;
+    }
+    md.setSpeeds((int)powerRight, (int)powerLeft);
+  }
+  brakeFP();
+
+  delay(30000);
 }
