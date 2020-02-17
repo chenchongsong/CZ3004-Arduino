@@ -103,7 +103,7 @@ void loop() {
 
   resetEncoder(); // Clear Tick Counts
 
-  double distance = 1758.86;; // 6 grids
+  double distance = 4450.41; // 15 grids
   double tmpLeftTicks = 0;
   double tmpRightTicks = 0;
   
@@ -145,7 +145,8 @@ void loop() {
   rotateLeft(1);
   goStraightFP(3);
   rotateRight(1);
-  goStraightFP(4);
+  goStraightFP(4); // 4 grids
+  distance = 3266.43; // 11 grids
   rotateRight(1);
   goStraightFP(3);
   rotateLeft(1);
