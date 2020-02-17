@@ -129,6 +129,12 @@ void loop() {
   }
   brakeFP();
 
+  if ( median(irArr2, irsampleSize) > block_dis
+    && median(irArr3, irsampleSize) > block_dis
+    && median(irArr4, irsampleSize) > block_dis) {
+    delay(30000); // stop
+  }
+
   disableInterrupt(encoderPinLeft);
   disableInterrupt(encoderPinRight);
   tmpLeftTicks = encoderPinLeftTicks;
