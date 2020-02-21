@@ -31,7 +31,9 @@ void rotateLeft(int grid) {
   double tickTarget = 0;
 
   resetEncoder(); // Clear Tick Counts
-  if (grid == 1) {
+  if (grid == 0){
+    tickTarget = 1;
+  } else if (grid == 1) {
     tickTarget = 405;
   } else if (grid == 2) {
     tickTarget = 815;
@@ -73,7 +75,9 @@ void rotateRight(double grid) {
   double tickTarget = 0;
 
   resetEncoder(); // Clear Tick Counts
-  if (grid == 1) {
+  if (grid == 0){
+    tickTarget = 1;
+  } else if (grid == 1) {
     tickTarget = 405;
   } else if (grid == 2) {
     tickTarget = 815;

@@ -92,7 +92,9 @@ void setup() {
 }
 
 void loop() {
-  if (receiveCommand()) {
-    executeCommand();
-  }
+  // if (receiveCommand()) {
+  //   executeCommand();
+  // }
+  caliAngle();
+  delay(1000);
 }
