@@ -22,29 +22,21 @@ void goStraightEX() {
    PID_straightEX.SetSampleTime(sampleTime / 2);
    PID_straightEX.SetOutputLimits(-255, 255);
 
-  int irsampleSize = 10;
-  irSamples(irsampleSize);
-  float block_dis = 4.5;
-  while((distance == -1|| (encoderPinLeftTicks + encoderPinRightTicks)/2 < distance)
-//        && (median(irArr2, irsampleSize)>block_dis && 
-//   median(irArr3, irsampleSize)>block_dis && 
-//   median(irArr4, irsampleSize)>block_dis)
-        )
-  {
+  while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
     if (PID_straightEX.Compute()) {
       diffValue = leftRightTicksDiff();
       powerLeft = leftCoeff * power + correction;
       powerRight = power - correction;
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
-    Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeEX();
-  diffValue = leftRightTicksDiff();
-  Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
-  Serial.println("OK");
+  // diffValue = leftRightTicksDiff();
+  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+  // Serial.println("OK");
 }
 
 void goStraightFP(int grid) {
@@ -79,12 +71,14 @@ void goStraightFP(int grid) {
     case 14: distance = 4171.40; break;
     case 15: distance = 4450.41; break;
     case 16: distance = 4803.03; break;
-    default: distance = 304.8799 * grid; 
+    default: distance = 304.8799 * grid;
   } 
   
   PID PID_straightFP(&diffValue, &correction, &orientation, kpStraightFP, kiStraightFP, kdStraightFP, DIRECT);
   PID_straightFP.SetMode(AUTOMATIC);
   PID_straightFP.SetSampleTime(sampleTime / 2);
+  PID_straightFP.SetOutputLimits(-255, 255);
+  delay(100);
  
   while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
     if (PID_straightFP.Compute()) {
@@ -93,8 +87,12 @@ void goStraightFP(int grid) {
       powerLeft = power + correction;
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
-    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+    Serial.println("     " + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeFP();
+  diffValue = leftRightTicksDiff();
+  Serial.println("     " + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+  Serial.println("OK");
 }

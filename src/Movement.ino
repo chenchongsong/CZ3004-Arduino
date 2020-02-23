@@ -145,6 +145,7 @@ void goBackFP(int grid) {
   PID PID_backFP(&diffValue, &correction, &orientation, kpStraightFP, kiStraightFP, kdStraightFP, DIRECT);
   PID_backFP.SetMode(AUTOMATIC);
   PID_backFP.SetSampleTime(sampleTime / 2);
+  PID_backFP.SetOutputLimits(-255, 255);
 
   while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
     if (PID_backFP.Compute()) {

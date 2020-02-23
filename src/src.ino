@@ -92,9 +92,6 @@ void setup() {
 }
 
 void loop() {
-  // if (receiveCommand()) {
-  //   executeCommand();
-  // }
-  caliAngle();
-  delay(1000);
+  goStraightFP(4);
+  delay(5000);
 }

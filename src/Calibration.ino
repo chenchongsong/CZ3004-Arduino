@@ -27,14 +27,14 @@ void caliDistance() {
   int cDsamples = 7;
   irSamples(cDsamples);
   
-  Serial.println("Prev");
-  Serial.println(median(irArr3, cDsamples));
+  // Serial.println("Prev");
+  // Serial.println(median(irArr3, cDsamples));
 
   while( abs(median(irArr3, cDsamples) - dist) > error
           && not(tried_front && tried_back) ) {
     
-    Serial.println("Center");
-    Serial.println(median(irArr3, cDsamples));
+    // Serial.println("Center");
+    // Serial.println(median(irArr3, cDsamples));
 
     if (median(irArr2,cDsamples) < dist || median(irArr3,cDsamples) < dist || median(irArr3,cDsamples) < dist) {
       goBackFP(0);
@@ -50,15 +50,12 @@ void caliDistance() {
 }
 
 void caliFront() {
-  // caliDistance();
-
   //make robot parallel
   int cFsamples = 7;
   irSamples(cFsamples);
   // Serial.println("Prev");
   // Serial.println(median(irArr2, cFsamples));
   // Serial.println(median(irArr4, cFsamples));
-
 
   float ir_diff = median(irArr2, cFsamples) - median(irArr4, cFsamples);
   float ideal = 0.4;
