@@ -58,14 +58,14 @@ void goStraightFP(int grid) {
   //Distance
   double distance = 0;
   switch(grid) {
-    case 0: distance = 8; break;
-    case 1: distance = 297.16; break;
-    case 2: distance = 586.68; break;
-    case 3: distance = 898.6; break;
-    case 4: distance = 1200.29; break;
-    case 5: distance = 1505.56; break;
-    case 6: distance = 1758.86; break;
-    case 7: distance = 2068.82; break;
+    case 0: distance = 8; break;        // for calibration
+    case 1: distance = 279; break;      // tested
+    case 2: distance = 576.68; break;   // tested
+    case 3: distance = 868.6; break;    // tested
+    case 4: distance = 1180.29; break;  // tested
+    case 5: distance = 1485.56; break;  // tested
+    case 6: distance = 1758.86; break;  // tested
+    case 7: distance = 2068.82; break;  // tested
     case 8: distance = 2350.04; break;
     case 9: distance = 2665.76; break;
     case 10: distance = 2966.76; break;
@@ -91,12 +91,12 @@ void goStraightFP(int grid) {
       powerLeft = power + correction;
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
-    Serial.println("     " + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+    // Serial.println("     " + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeFP();
-  diffValue = leftRightTicksDiff();
-  Serial.println("     " + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
-  Serial.println("OK");
+  // diffValue = leftRightTicksDiff();
+  // Serial.println("     " + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+  // Serial.println("OK");
 }

@@ -1,11 +1,5 @@
 // Brakes
 void brake() {
-  // md.setSpeeds(0, 0);
-  // for (int i = 200; i < 400; i += 50) {
-  //   md.setBrakes(i, i);
-  //   delay(10);
-  // }
-  // delay(10);
   md.setBrakes(380, 400);
 }
 

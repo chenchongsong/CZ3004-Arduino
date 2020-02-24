@@ -92,24 +92,27 @@ void setup() {
 }
 
 void loop() {
-  delay(2000);
+  goStraightFP(1);
+  delay(1000);
+  goStraightFP(1);
+  delay(1000);
+  goStraightFP(1);
+  delay(1000);
 
-  goStraightEX();
-  delay(200);
-  goStraightEX();
-  delay(200);
-  
-  delay(5000);
-  rotateLeft(1);
-  delay(5000);
+  // rotateRight(1);
+  // delay(5000);
+  // goStraightFP(4);
+  // delay(5000);
 
-  goStraightEX();
-  delay(200);
-  goStraightEX();
+  // rotateRight(1);
+  // delay(5000);
+  // goStraightFP(3);
+  // delay(5000);
 
-  delay(5000);
-  rotateRight(1);
-  delay(5000);
+  // rotateLeft(1);
+  // delay(5000);
+  // goStraightFP(4);
+  // delay(5000);
 
   delay(30000);
 }
