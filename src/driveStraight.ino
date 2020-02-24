@@ -3,8 +3,8 @@ void goStraightEX() {
   strght_trig++;
   
   //Temporary variable for control system(power)
-  double power = 250;
-  double leftCoeff = 1.00;
+  double power = 200;
+  double leftCoeff = 1.05;
   double powerLeft = leftCoeff * power; 
   double powerRight = power;
   double diffValue = 0;
@@ -14,7 +14,7 @@ void goStraightEX() {
   resetEncoder();
 
   //Distance
-   double distance = 275;
+   double distance = 300;
   
    //PID
    PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
@@ -27,6 +27,10 @@ void goStraightEX() {
       diffValue = leftRightTicksDiff();
       powerLeft = leftCoeff * power + correction;
       powerRight = power - correction;
+      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
+        powerRight = powerRight / 2.0;
+        powerLeft = powerLeft / 2.0;
+      }
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
     // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));

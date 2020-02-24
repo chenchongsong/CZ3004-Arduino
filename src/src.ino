@@ -18,7 +18,7 @@
 /// PID constant variables
 double sampleTime = 100;
 
-double kpStraightEX = 0.3; // larger -> left_tick larger -> turn right
+double kpStraightEX = 2.0; // larger -> left_tick larger -> turn right
 double kiStraightEX = 0.0; //0.2;
 double kdStraightEX = 0.0; //0.6; //0.5
 
@@ -92,6 +92,35 @@ void setup() {
 }
 
 void loop() {
-  goStraightFP(4);
-  delay(5000);
+  delay(2000);
+
+  goStraightEX();
+  delay(200);
+  goStraightEX();
+  delay(200);
+  goStraightEX();
+  delay(200);
+  goStraightEX();
+  delay(200);
+  goStraightEX();
+  delay(200);
+  goStraightEX();
+  delay(200);
+  
+  // delay(5000);
+  // rotateLeft(1);
+  // delay(5000);
+
+  // goStraightEX();
+  // delay(100);
+  // goStraightEX();
+
+  // delay(5000);
+  // rotateRight(1);
+  // delay(5000);
+
+
+
+
+  delay(30000);
 }
