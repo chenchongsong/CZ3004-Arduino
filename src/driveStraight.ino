@@ -4,9 +4,9 @@ void goStraightEX() {
   
   //Temporary variable for control system(power)
   double power = 200;
-  double leftCoeff = 1.05;
-  double powerLeft = leftCoeff * power; 
-  double powerRight = power;
+  double rightCoeff = 0.93;
+  double powerLeft = power;
+  double powerRight = rightCoeff * power;
   double diffValue = 0;
   double correction = 0;
   
@@ -14,7 +14,7 @@ void goStraightEX() {
   resetEncoder();
 
   //Distance
-   double distance = 300;
+   double distance = 290;
   
    //PID
    PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
@@ -25,22 +25,22 @@ void goStraightEX() {
   while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
     if (PID_straightEX.Compute()) {
       diffValue = leftRightTicksDiff();
-      powerLeft = leftCoeff * power + correction;
-      powerRight = power - correction;
+      powerLeft = power + correction;
+      powerRight = rightCoeff * power - correction;
       if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
-        powerRight = powerRight / 2.0;
-        powerLeft = powerLeft / 2.0;
+        powerRight = powerRight * 0.75;
+        powerLeft = powerLeft * 0.75;
       }
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
-    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+    Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeEX();
-  // diffValue = leftRightTicksDiff();
-  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
-  // Serial.println("OK");
+  diffValue = leftRightTicksDiff();
+  Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+  Serial.println("OK\n\n");
 }
 
 void goStraightFP(int grid) {
