@@ -98,29 +98,18 @@ void loop() {
   delay(200);
   goStraightEX();
   delay(200);
-  goStraightEX();
-  delay(200);
-  goStraightEX();
-  delay(200);
-  goStraightEX();
-  delay(200);
-  goStraightEX();
-  delay(200);
   
-  // delay(5000);
-  // rotateLeft(1);
-  // delay(5000);
+  delay(5000);
+  rotateLeft(1);
+  delay(5000);
 
-  // goStraightEX();
-  // delay(100);
-  // goStraightEX();
+  goStraightEX();
+  delay(200);
+  goStraightEX();
 
-  // delay(5000);
-  // rotateRight(1);
-  // delay(5000);
-
-
-
+  delay(5000);
+  rotateRight(1);
+  delay(5000);
 
   delay(30000);
 }
