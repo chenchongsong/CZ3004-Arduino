@@ -33,14 +33,14 @@ void goStraightEX() {
       }
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
-    Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeEX();
   diffValue = leftRightTicksDiff();
-  Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
-  Serial.println("OK\n\n");
+  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+  // Serial.println("OK\n\n");
 }
 
 void goStraightFP(int grid) {

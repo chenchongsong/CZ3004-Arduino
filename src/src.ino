@@ -68,6 +68,7 @@ float irArr6[50];
 // For receiving commands from Rpi
 int command;
 int strght_trig = 0;
+int msg_count = 0;
 
 void setup() {
   //Debug
@@ -92,34 +93,7 @@ void setup() {
 }
 
 void loop() {
-  goStraightEX();
-  delay(200);
-  goStraightEX();
-  delay(200);
-  goStraightEX();
-  delay(200);
-
-  goStraightEX();
-  delay(200);
-  goStraightEX();
-  delay(200);
-  goStraightEX();
-  delay(200);
-
-  // rotateRight(1);
-  // delay(5000);
-  // goStraightFP(4);
-  // delay(5000);
-
-  // rotateRight(1);
-  // delay(5000);
-  // goStraightFP(3);
-  // delay(5000);
-
-  // rotateLeft(1);
-  // delay(5000);
-  // goStraightFP(4);
-  // delay(5000);
-
-  delay(30000);
+  if (receiveCommand()) {
+    executeCommand();
+  }
 }

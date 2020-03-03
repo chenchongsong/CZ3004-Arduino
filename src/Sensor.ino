@@ -123,7 +123,7 @@ void sendIRtoPC() {
 
 
 // cali distance one block
-float block_dis = 9.5;
+// float block_dis = 9.5;
 
 // front calidistance to any 1 block in range
 //if(median(irArr2, irsampleSize)<block_dis || 
@@ -136,13 +136,15 @@ float block_dis = 9.5;
 //  (median(irArr5, irsampleSize)) == 17.5
 //  ) caliRight();
 
-  Serial.println("obs:" + String(estLong(median(irArr1, irsampleSize))) + "|"
-                 + String(estShortFL(median(irArr2, irsampleSize))) + "|"
-                 + String(estShortFM(median(irArr3, irsampleSize))) + "|"
-                 + String(estShortFR(median(irArr4, irsampleSize))) + "|"
-                 + String(estShortLeft(median(irArr5, irsampleSize))) + "|"
-                 + String(estShortRight(median(irArr6, irsampleSize)))
-                );
+  Serial.println("pc:obs:"
+    + String(estLong(median(irArr1, irsampleSize))) + "|"
+    + String(estShortFL(median(irArr2, irsampleSize))) + "|"
+    + String(estShortFM(median(irArr3, irsampleSize))) + "|"
+    + String(estShortFR(median(irArr4, irsampleSize))) + "|"
+    + String(estShortLeft(median(irArr5, irsampleSize))) + "|"
+    + String(estShortRight(median(irArr6, irsampleSize))) + "|msgcount" + String(msg_count)
+  );
+  msg_count = msg_count + 1;
 }
 
 int estShortFL(float reading) {
