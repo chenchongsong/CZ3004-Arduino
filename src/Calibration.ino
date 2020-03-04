@@ -29,10 +29,10 @@ void caliDistance() {
   int cDsamples = 7;
   irSamples(cDsamples);
   
-  Serial.println("Prev");
-  Serial.println(median(irArr2, cDsamples));
-  Serial.println(median(irArr3, cDsamples));
-  Serial.println(median(irArr4, cDsamples));
+  // Serial.println("Prev");
+  // Serial.println(median(irArr2, cDsamples));
+  // Serial.println(median(irArr3, cDsamples));
+  // Serial.println(median(irArr4, cDsamples));
 
   while(((abs(median(irArr2,cDsamples)- dist2) > error) ||
          (abs(median(irArr3,cDsamples)- dist3) > error) ||
