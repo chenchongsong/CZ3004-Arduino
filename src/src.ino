@@ -96,4 +96,10 @@ void loop() {
   if (receiveCommand()) {
     executeCommand();
   }
+  // caliAngle();
+  // caliDistance();
+  // caliFront();
+  // sendIRtoPC();
+  // checkRawValues();
+  delay(5000);
 }

@@ -13,17 +13,17 @@ float readIR1() {
 
 // FRONT LEFT
 float readIR2() {
-  return 27.728 * pow(map(analogRead(irR2), 0, 1023, 0, 5000) / 1000.0, -1.2045) -5.5;
+  return 27.728 * pow(map(analogRead(irR2), 0, 1023, 0, 5000) / 1000.0, -1.2045) - 5.9;
 }//5,15,25,35
 
 // FRONT MIDDLE 
 float readIR3() {
-  return 27.728 * pow(map(analogRead(irR3), 0, 1023, 0, 5000) / 1000.0, -1.2045) -2.2;
+  return 27.728 * pow(map(analogRead(irR3), 0, 1023, 0, 5000) / 1000.0, -1.2045) - 2.2;
 }//5,15,24,31
 
 // FRONT RIGHT
 float readIR4() {
-  return 27.728 * pow(map(analogRead(irR4), 0, 1023, 0, 5000) / 1000.0, -1.2045) -6.5;
+  return 27.728 * pow(map(analogRead(irR4), 0, 1023, 0, 5000) / 1000.0, -1.2045) - 6.4;
 }//5,15,25,29
 
 // LEFT
@@ -38,10 +38,10 @@ float readIR6() {
 
 void checkRawValues (){
  float tmp = readIR1();
- Serial.println("obs:"+String(tmp)+"|"+String(estLong(tmp))
-                     //+String(readIR2())+"|"
-                     //+String(readIR3())+"|"
-                     //+String(readIR4())+"| avg: "
+ Serial.println("obs:"
+                     +String(readIR2())+ "|"
+                     +String(readIR3())+ "|"
+                     +String(readIR4())
                      //+String((readIR2() + readIR3() + readIR4()) / 3.)
                     //  +String(readIR5())+"|"
                     //  +String(readIR6())
@@ -149,7 +149,7 @@ void sendIRtoPC() {
 
 int estShortFL(float reading) {
   if (reading < 9.5) return 0;
-  if (reading < 20.5) return 1;
+  if (reading < 21.5) return 1;
   if (reading <= 33) return 2; 
   return 3;  // 3 grids free or above
 }
@@ -163,7 +163,7 @@ int estShortFM(float reading) {
 
 int estShortFR(float reading) {
   if (reading < 9.5) return 0;
-  if (reading < 21.5) return 1;
+  if (reading < 20.5) return 1;
   if (reading <= 33) return 2;
   return 3;  // 3 grids free or above
 }
