@@ -101,5 +101,5 @@ void loop() {
   // caliFront();
   // sendIRtoPC();
   // checkRawValues();
-  delay(5000);
+  // delay(5000);
 }

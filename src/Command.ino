@@ -19,6 +19,8 @@ void executeCommand() {
     caliAngle();
   } else if (command == 's') {
     // nothing
+  } else if ('A' <= command && command <= 'Z') {
+    goStraightFP(command - 'A' + 1);
   } else {
     return;
   }
