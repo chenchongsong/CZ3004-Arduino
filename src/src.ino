@@ -96,5 +96,6 @@ void loop() {
   if (receiveCommand()) {
     executeCommand();
   }
+  resetEncoder();
   // delay(5000);
 }

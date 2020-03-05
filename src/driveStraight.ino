@@ -12,12 +12,6 @@ void goStraightEX() {
   
   //Clear the current interupt variable
   resetEncoder();
-  // disableInterrupt(encoderPinLeft);
-  // disableInterrupt(encoderPinRight);
-  // encoderPinLeftTicks = 2;
-  // encoderPinRightTicks = 0;
-  // enableInterrupt(encoderPinLeft, ISREncoderLeft_CHANGE, RISING);
-  // enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
 
   //Distance
    double distance = 297.5;
