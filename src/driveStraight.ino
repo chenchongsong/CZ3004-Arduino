@@ -1,5 +1,5 @@
 void goStraightEX() {
-  double orientation = 0; 
+  double orientation = -2; // negative means left 
   strght_trig++;
   
   //Temporary variable for control system(power)
@@ -12,9 +12,15 @@ void goStraightEX() {
   
   //Clear the current interupt variable
   resetEncoder();
+  // disableInterrupt(encoderPinLeft);
+  // disableInterrupt(encoderPinRight);
+  // encoderPinLeftTicks = 2;
+  // encoderPinRightTicks = 0;
+  // enableInterrupt(encoderPinLeft, ISREncoderLeft_CHANGE, RISING);
+  // enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
 
   //Distance
-   double distance = 290;
+   double distance = 297.5;
   
    //PID
    PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
