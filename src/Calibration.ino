@@ -68,7 +68,7 @@ void caliFront() {
   // Serial.println(median(irArr4, cFsamples));
 
   float ir_diff = median(irArr2, cFsamples) - median(irArr4, cFsamples);
-  float ideal = 0.4;   // more makes left
+  float ideal = 0.2;   // more makes left
   bool tried_left = false;
   bool tried_right = false;
 
