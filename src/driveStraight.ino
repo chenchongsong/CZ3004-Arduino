@@ -74,8 +74,9 @@ void goStraightFP(int grid) {
     case 13: distance = 3851.83; break;
     case 14: distance = 4171.40; break;
     case 15: distance = 4450.41; break;
-    case 16: distance = 4803.03; break;
-    default: distance = 304.8799 * grid;
+    case 16: distance = 4783.03; break;
+    case 17: distance = 5083.03; break;
+    default: distance = 303.8799 * grid;
   } 
   
   PID PID_straightFP(&diffValue, &correction, &orientation, kpStraightFP, kiStraightFP, kdStraightFP, DIRECT);
