@@ -22,7 +22,7 @@ void goStraightEX() {
    PID_straightEX.SetSampleTime(sampleTime / 2);
    PID_straightEX.SetOutputLimits(-255, 255);
 
-  while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
+  while (encoderPinLeftTicks < distance) {
     if (PID_straightEX.Compute()) {
       diffValue = leftRightTicksDiff();
       powerLeft = power + correction;
