@@ -14,13 +14,13 @@ void goStraightEX() {
   resetEncoder();
 
   //Distance
-   double distance = 297.5;
+  double distance = 297.5;
   
-   //PID
-   PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
-   PID_straightEX.SetMode(AUTOMATIC);
-   PID_straightEX.SetSampleTime(sampleTime / 2);
-   PID_straightEX.SetOutputLimits(-255, 255);
+  //PID
+  PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
+  PID_straightEX.SetMode(AUTOMATIC);
+  PID_straightEX.SetSampleTime(sampleTime / 2);
+  PID_straightEX.SetOutputLimits(-255, 255);
 
   while (encoderPinLeftTicks < distance) {
     if (PID_straightEX.Compute()) {
@@ -37,10 +37,37 @@ void goStraightEX() {
     // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeEX();
-  diffValue = leftRightTicksDiff();
   // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
-  // Serial.println("OK\n\n");
+  
+  if (encoderPinLeftTicks > 250.0) return;
+
+  // Half Grid Exception Handling
+  delay(1000);
+  distance = distance - encoderPinLeftTicks;
+  orientation = 0 - diffValue;
+  diffValue = 0;
+  correction = 0;
+  resetEncoder();
+  PID PID_COM(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
+  PID_COM.SetMode(AUTOMATIC);
+  PID_COM.SetSampleTime(sampleTime / 2);
+  PID_COM.SetOutputLimits(-255, 255);
+
+  while (encoderPinLeftTicks < distance) {
+    if (PID_COM.Compute()) {
+      diffValue = leftRightTicksDiff();
+      powerLeft = power + correction;
+      powerRight = rightCoeff * power - correction;
+      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
+        powerRight = powerRight * 0.75;
+        powerLeft = powerLeft * 0.75;
+      }
+    }
+    md.setSpeeds((int)powerRight, (int)powerLeft);
+  }
+  brakeEX();
+  // Serial.println("After Half Grid Handling");
+  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
 }
 
 void goStraightFP(int grid) {
