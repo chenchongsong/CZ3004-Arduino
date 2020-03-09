@@ -1,9 +1,9 @@
 void goStraightEX() {
-  double orientation = 0; // negative means left 
+  double orientation = -2; // negative means left 
   strght_trig++;
   
   //Temporary variable for control system(power)
-  double power = 200;
+  double power = 250;
   double rightCoeff = 0.93;
   double powerLeft = power;
   double powerRight = rightCoeff * power;
@@ -34,10 +34,10 @@ void goStraightEX() {
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
     // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
+    // Serial.println("    " + String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeEX();
-  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  Serial.println("dummy1ex" + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
   
   if (encoderPinLeftTicks > 250.0) return;
 
