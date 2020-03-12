@@ -120,8 +120,8 @@ void goStraightFP(int grid) {
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
 
-    if (distance > 100 &&
-        (encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance && 
+    if (distance > 140 &&
+        (encoderPinRightTicks + encoderPinLeftTicks) / 2 + 140 >= distance && 
         readIR2() < 5.55 &&
         readIR3() < 6.0 &&
         readIR4() < 4.7) {
