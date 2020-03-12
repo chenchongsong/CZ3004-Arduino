@@ -120,10 +120,12 @@ void goStraightFP(int grid) {
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
 
-    if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
-      if (readIR2() < 5.55 && readIR3() < 6.0 && readIR4() < 4.7) {
-        break;
-      }
+    if (distance > 100 &&
+        (encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance && 
+        readIR2() < 5.55 &&
+        readIR3() < 6.0 &&
+        readIR4() < 4.7) {
+      break;
     }
     // Serial.println("     " + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
     // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
