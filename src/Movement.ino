@@ -26,6 +26,7 @@ void rotateLeft(int grid) {
 
   resetEncoder(); // Clear Tick Counts
   if (grid == 0){
+    power = 300;
     tickTarget = 1;
   } else if (grid == 1) {
     tickTarget = 390;
@@ -70,6 +71,7 @@ void rotateRight(double grid) {
 
   resetEncoder(); // Clear Tick Counts
   if (grid == 0){
+    power = 300;
     tickTarget = 1;
   } else if (grid == 1) {
     tickTarget = 390;
@@ -134,7 +136,7 @@ void goBackFP(int grid) {
     case 15: distance = 4450.41; break;
     case 16: distance = 4803.03; break;
     default: distance = 304.8799 * grid; 
-  } 
+  }
 
   PID PID_backFP(&diffValue, &correction, &orientation, kpStraightFP, kiStraightFP, kdStraightFP, DIRECT);
   PID_backFP.SetMode(AUTOMATIC);

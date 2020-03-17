@@ -59,8 +59,8 @@ void goStraightEX() {
       powerLeft = power + correction;
       powerRight = rightCoeff * power - correction;
       if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
-        powerRight = powerRight * 0.75;
-        powerLeft = powerLeft * 0.75;
+        powerRight = powerRight * 0.5;
+        powerLeft = powerLeft * 0.5;
       }
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
