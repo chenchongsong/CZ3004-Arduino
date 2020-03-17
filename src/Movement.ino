@@ -28,7 +28,7 @@ void rotateLeft(int grid) {
   if (grid == 0){
     tickTarget = 1;
   } else if (grid == 1) {
-    tickTarget = 405;
+    tickTarget = 390;
   } else if (grid == 2) {
     tickTarget = 815;
   }
@@ -72,7 +72,7 @@ void rotateRight(double grid) {
   if (grid == 0){
     tickTarget = 1;
   } else if (grid == 1) {
-    tickTarget = 405;
+    tickTarget = 390;
   } else if (grid == 2) {
     tickTarget = 815;
   }
