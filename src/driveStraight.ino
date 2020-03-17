@@ -1,10 +1,10 @@
 void goStraightEX() {
-  double orientation = -2; // negative means left 
+  double orientation = -8; // negative means left 
   strght_trig++;
   
   //Temporary variable for control system(power)
-  double power = 250;
-  double rightCoeff = 0.93;
+  double power = 400;
+  double rightCoeff = 0.92;
   double powerLeft = power;
   double powerRight = rightCoeff * power;
   double diffValue = 0;
@@ -14,12 +14,12 @@ void goStraightEX() {
   resetEncoder();
 
   //Distance
-  double distance = 297.5;
+  double distance = 285;
   
   //PID
   PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
   PID_straightEX.SetMode(AUTOMATIC);
-  PID_straightEX.SetSampleTime(sampleTime / 2);
+  PID_straightEX.SetSampleTime(sampleTime / 4);
   PID_straightEX.SetOutputLimits(-255, 255);
 
   while (encoderPinLeftTicks < distance) {
@@ -28,8 +28,8 @@ void goStraightEX() {
       powerLeft = power + correction;
       powerRight = rightCoeff * power - correction;
       if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
-        powerRight = powerRight * 0.75;
-        powerLeft = powerLeft * 0.75;
+        powerRight = powerRight * 0.5;
+        powerLeft = powerLeft * 0.5;
       }
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
@@ -37,12 +37,12 @@ void goStraightEX() {
     // Serial.println("    " + String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeEX();
-  Serial.println("dummy1ex" + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  // Serial.println("dummy1ex" + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
   
   if (encoderPinLeftTicks > 250.0) return;
 
   // Half Grid Exception Handling
-  delay(1000);
+  delay(500);
   distance = distance - encoderPinLeftTicks;
   orientation = 0 - diffValue;
   diffValue = 0;

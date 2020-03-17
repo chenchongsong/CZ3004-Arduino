@@ -16,7 +16,7 @@ void brakeFP() {
 }
 
 void rotateLeft(int grid) {
-  double power = 300;
+  double power = 400;
   double powerLeft = power;
   double powerRight = power;
   double orientation = 0;
@@ -43,7 +43,7 @@ void rotateLeft(int grid) {
       diffValue = leftRightTicksDiff();
       powerRight = 0.98 * power - correction;
       powerLeft =  power + correction;
-      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 200 >= tickTarget) {
+      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= tickTarget) {
         powerRight = powerRight / 3.0;
         powerLeft = powerLeft / 3.0;
       }
@@ -60,7 +60,7 @@ void rotateLeft(int grid) {
 }
 
 void rotateRight(double grid) {
-  double power = 300;
+  double power = 400;
   double powerLeft = power;
   double powerRight = power;
   double orientation = 0;
@@ -87,7 +87,7 @@ void rotateRight(double grid) {
       diffValue = leftRightTicksDiff();
       powerRight = 0.98 * power - correction;
       powerLeft =  power + correction;
-      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 200 >= tickTarget) {
+      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= tickTarget) {
         powerRight = powerRight / 3.0;
         powerLeft = powerLeft / 3.0;
       }

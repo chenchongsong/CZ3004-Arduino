@@ -13,8 +13,8 @@ void executeCommand() {
     rotateRight(1);
   } else if (command == 'f') {
     goStraightEX();
-  } else if (command == 'b') {
-    goBackFP(1);
+  // } else if (command == 'b') {
+  //   goBackFP(1);
   } else if (command == 'c') {
     caliAngle();
   } else if (command == 's') {

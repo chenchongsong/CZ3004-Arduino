@@ -93,8 +93,6 @@ void setup() {
 }
 
 void loop() {
-  if (receiveCommand()) {
-    executeCommand();
-  }
-  resetEncoder();
+  goStraightEX();
+  delay(3000);
 }
