@@ -93,6 +93,8 @@ void setup() {
 }
 
 void loop() {
-  goStraightFP(5);
-  delay(6000);
+  if (receiveCommand()) {
+    executeCommand();
+  }
+  resetEncoder();
 }
