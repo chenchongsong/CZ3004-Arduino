@@ -105,6 +105,9 @@ void rotateRight(double grid) {
 
 void goBackFP(int grid) {
   double power = 380;
+  if (grid == 0) {
+    power = 250;
+  }
   double powerLeft = power;
   double powerRight = power;
   double diffValue = 0;

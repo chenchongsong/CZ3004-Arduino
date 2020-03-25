@@ -1,10 +1,10 @@
 void goStraightEX() {
-  double orientation = -4; // negative means left 
+  double orientation = -1; // negative means left 
   strght_trig++;
   
   //Temporary variable for control system(power)
-  double power = 350;
-  double rightCoeff = 1.04;
+  double power = 250;
+  double rightCoeff = 1.05;
   double powerLeft = power;
   double powerRight = rightCoeff * power;
   double diffValue = 0;
@@ -14,7 +14,7 @@ void goStraightEX() {
   resetEncoder();
 
   //Distance
-  double distance = 280;
+  double distance = 297.5;
   
   //PID
   PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
@@ -36,35 +36,24 @@ void goStraightEX() {
         powerRight = powerRight;
       }
       if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
-        powerRight = powerRight * 0.55;
-        powerLeft = powerLeft * 0.47;
+        powerRight = powerRight * 0.5;
+        powerLeft = powerLeft * 0.5;
       }
     }
-
-    // new
-    // diffValue = leftRightTicksDiff();
-    // correction = -(diffValue - orientation) * 1.5;
-    // powerLeft = power + correction;
-    // powerRight = rightCoeff * power - correction;
-    // if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
-    //   powerRight = powerRight * 0.75;
-    //   powerLeft = powerLeft * 0.75;
-    // }
-
     md.setSpeeds((int)powerRight, (int)powerLeft);
     // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
     // Serial.println("    " + String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeEX();
   diffValue = leftRightTicksDiff();
-  // Serial.println("dummy1ex" + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  Serial.println("dummy1ex" + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
   // Serial.println("    " + String(diffValue) +":dif \n\n");
 
   if (encoderPinLeftTicks > 250.0) return;
 
   // Half Grid Exception Handling
   delay(1000);
-  distance = distance - encoderPinLeftTicks;
+  distance = 297.5 - encoderPinLeftTicks;
   orientation = 0 - diffValue;
   diffValue = 0;
   correction = 0;
@@ -95,6 +84,9 @@ void goStraightFP(int grid) {
   strght_trig++;
   
   double power = 380;
+  if (grid == 0) {
+    power = 250;
+  }
   double powerLeft = power;
   double powerRight = power;
   double diffValue = 0;
