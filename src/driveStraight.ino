@@ -1,10 +1,10 @@
 void goStraightEX() {
-  double orientation = -2; // negative means left 
+  double orientation = -1; // negative means left 
   strght_trig++;
   
   //Temporary variable for control system(power)
   double power = 250;
-  double rightCoeff = 0.93;
+  double rightCoeff = 1.05;
   double powerLeft = power;
   double powerRight = rightCoeff * power;
   double diffValue = 0;
@@ -19,26 +19,47 @@ void goStraightEX() {
   //PID
   PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
   PID_straightEX.SetMode(AUTOMATIC);
-  PID_straightEX.SetSampleTime(sampleTime / 2);
+  PID_straightEX.SetSampleTime(5);
   PID_straightEX.SetOutputLimits(-255, 255);
+
+  md.setSpeeds(0, 200);  // left first
+  delay(5);
 
   while (encoderPinLeftTicks < distance) {
     if (PID_straightEX.Compute()) {
       diffValue = leftRightTicksDiff();
+      correction = -(diffValue - orientation) * 2;
       powerLeft = power + correction;
       powerRight = rightCoeff * power - correction;
+      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 <= 130) {
+        powerLeft = powerLeft + 15;
+        powerRight = powerRight;
+      }
       if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
-        powerRight = powerRight * 0.75;
-        powerLeft = powerLeft * 0.75;
+        powerRight = powerRight * 0.5;
+        powerLeft = powerLeft * 0.5;
       }
     }
+
+    // new
+    // diffValue = leftRightTicksDiff();
+    // correction = -(diffValue - orientation) * 1.5;
+    // powerLeft = power + correction;
+    // powerRight = rightCoeff * power - correction;
+    // if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
+    //   powerRight = powerRight * 0.75;
+    //   powerLeft = powerLeft * 0.75;
+    // }
+
     md.setSpeeds((int)powerRight, (int)powerLeft);
-    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    // Serial.println("    " + String(diffValue) +":dif | correction:"+ String(correction));
+    Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    Serial.println("    " + String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeEX();
+  diffValue = leftRightTicksDiff();
   Serial.println("dummy1ex" + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  
+  Serial.println("    " + String(diffValue) +":dif \n\n");
+
   if (encoderPinLeftTicks > 250.0) return;
 
   // Half Grid Exception Handling

@@ -18,7 +18,7 @@
 /// PID constant variables
 double sampleTime = 100;
 
-double kpStraightEX = 2.0; // larger -> left_tick larger -> turn right
+double kpStraightEX = 1.0; // larger -> left_tick larger -> turn right
 double kiStraightEX = 0.2; //0.2;
 double kdStraightEX = 0.0; //0.6; //0.5
 
@@ -93,8 +93,6 @@ void setup() {
 }
 
 void loop() {
-  if (receiveCommand()) {
-    executeCommand();
-  }
-  resetEncoder();
+  goStraightEX();
+  delay(3000);
 }
