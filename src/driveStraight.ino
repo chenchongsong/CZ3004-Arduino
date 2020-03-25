@@ -1,10 +1,10 @@
 void goStraightEX() {
-  double orientation = 0; // negative means left 
+  double orientation = 3; // negative means left
   strght_trig++;
   
   //Temporary variable for control system(power)
   double power = 250;
-  double rightCoeff = 1.05;
+  double rightCoeff = 1.03;
   double powerLeft = power;
   double powerRight = rightCoeff * power;
   double diffValue = 0;

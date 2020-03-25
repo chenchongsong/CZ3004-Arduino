@@ -93,10 +93,10 @@ void setup() {
 }
 
 void loop() {
-  if (receiveCommand()) {
-    executeCommand();
-  }
+  // if (receiveCommand()) {
+  //   executeCommand();
+  // }
 
-  // goStraightEX();
-  // delay(2000);
+  goStraightEX();
+  delay(2000);
 }
