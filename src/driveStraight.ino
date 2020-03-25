@@ -1,5 +1,5 @@
 void goStraightEX() {
-  double orientation = -1; // negative means left 
+  double orientation = 0; // negative means left 
   strght_trig++;
   
   //Temporary variable for control system(power)
@@ -52,7 +52,7 @@ void goStraightEX() {
   if (encoderPinLeftTicks > 250.0) return;
 
   // Half Grid Exception Handling
-  delay(1000);
+  delay(150);
   distance = 297.5 - encoderPinLeftTicks;
   orientation = 0 - diffValue;
   diffValue = 0;

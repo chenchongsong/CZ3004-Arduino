@@ -28,7 +28,7 @@ void rotateLeft(int grid) {
   if (grid == 0){
     tickTarget = 1;
   } else if (grid == 1) {
-    tickTarget = 400;
+    tickTarget = 390;
   } else if (grid == 2) {
     tickTarget = 815;
   }
@@ -43,9 +43,9 @@ void rotateLeft(int grid) {
       diffValue = leftRightTicksDiff();
       powerRight = power - correction;
       powerLeft =  power + correction;
-      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 200 >= tickTarget) {
-        powerRight = powerRight / 3.0;
-        powerLeft = powerLeft / 3.0;
+      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 150 >= tickTarget) {
+        powerRight = powerRight * 0.75;
+        powerLeft = powerLeft * 0.75;
       }
       md.setSpeeds((int)powerRight, -(int)powerLeft);
     }
@@ -72,7 +72,7 @@ void rotateRight(double grid) {
   if (grid == 0){
     tickTarget = 1;
   } else if (grid == 1) {
-    tickTarget = 400;
+    tickTarget = 390;
   } else if (grid == 2) {
     tickTarget = 815;
   }
@@ -87,9 +87,9 @@ void rotateRight(double grid) {
       diffValue = leftRightTicksDiff();
       powerRight = power - correction;
       powerLeft =  power + correction;
-      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 200 >= tickTarget) {
-        powerRight = powerRight / 3.0;
-        powerLeft = powerLeft / 3.0;
+      if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 150 >= tickTarget) {
+        powerRight = powerRight * 0.75;
+        powerLeft = powerLeft * 0.75;
       }
       md.setSpeeds((int)-powerRight, (int)powerLeft);
     }

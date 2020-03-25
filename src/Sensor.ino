@@ -142,9 +142,8 @@ void sendIRtoPC() {
     + String(estShortFM(median(irArr3, irsampleSize))) + "|"
     + String(estShortFR(median(irArr4, irsampleSize))) + "|"
     + String(estShortLeft(median(irArr5, irsampleSize))) + "|"
-    + String(estShortRight(median(irArr6, irsampleSize))) + "|msgcount" + String(msg_count)
+    + String(estShortRight(median(irArr6, irsampleSize))) + "|msgcount0"
   );
-  msg_count = msg_count + 1;
 }
 
 int estShortFL(float reading) {

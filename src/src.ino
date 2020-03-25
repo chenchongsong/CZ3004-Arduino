@@ -96,5 +96,7 @@ void loop() {
   if (receiveCommand()) {
     executeCommand();
   }
-  resetEncoder();
+
+  // goStraightEX();
+  // delay(2000);
 }
