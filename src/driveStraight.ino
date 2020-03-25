@@ -1,10 +1,10 @@
 void goStraightEX() {
-  double orientation = -1; // negative means left 
+  double orientation = -4; // negative means left 
   strght_trig++;
   
   //Temporary variable for control system(power)
-  double power = 250;
-  double rightCoeff = 1.05;
+  double power = 350;
+  double rightCoeff = 1.04;
   double powerLeft = power;
   double powerRight = rightCoeff * power;
   double diffValue = 0;
@@ -14,7 +14,7 @@ void goStraightEX() {
   resetEncoder();
 
   //Distance
-  double distance = 297.5;
+  double distance = 280;
   
   //PID
   PID PID_straightEX(&diffValue, &correction, &orientation, kpStraightEX, kiStraightEX, kdStraightEX, DIRECT);
@@ -36,8 +36,8 @@ void goStraightEX() {
         powerRight = powerRight;
       }
       if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 100 >= distance) {
-        powerRight = powerRight * 0.5;
-        powerLeft = powerLeft * 0.5;
+        powerRight = powerRight * 0.55;
+        powerLeft = powerLeft * 0.47;
       }
     }
 
@@ -52,13 +52,13 @@ void goStraightEX() {
     // }
 
     md.setSpeeds((int)powerRight, (int)powerLeft);
-    Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    Serial.println("    " + String(diffValue) +":dif | correction:"+ String(correction));
+    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+    // Serial.println("    " + String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeEX();
   diffValue = leftRightTicksDiff();
-  Serial.println("dummy1ex" + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  Serial.println("    " + String(diffValue) +":dif \n\n");
+  // Serial.println("dummy1ex" + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
+  // Serial.println("    " + String(diffValue) +":dif \n\n");
 
   if (encoderPinLeftTicks > 250.0) return;
 
@@ -136,7 +136,7 @@ void goStraightFP(int grid) {
   while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
     if (PID_straightFP.Compute()) {
       diffValue = leftRightTicksDiff();
-      powerRight = power - correction;
+      powerRight = 1.02 * power - correction;
       powerLeft = power + correction;
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);

@@ -93,6 +93,6 @@ void setup() {
 }
 
 void loop() {
-  goStraightEX();
-  delay(3000);
+  goStraightFP(5);
+  delay(6000);
 }

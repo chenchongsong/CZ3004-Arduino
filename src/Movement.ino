@@ -28,7 +28,7 @@ void rotateLeft(int grid) {
   if (grid == 0){
     tickTarget = 1;
   } else if (grid == 1) {
-    tickTarget = 405;
+    tickTarget = 400;
   } else if (grid == 2) {
     tickTarget = 815;
   }
@@ -41,7 +41,7 @@ void rotateLeft(int grid) {
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget) {
     if (PID_left.Compute()) {
       diffValue = leftRightTicksDiff();
-      powerRight = 0.98 * power - correction;
+      powerRight = power - correction;
       powerLeft =  power + correction;
       if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 200 >= tickTarget) {
         powerRight = powerRight / 3.0;
@@ -72,7 +72,7 @@ void rotateRight(double grid) {
   if (grid == 0){
     tickTarget = 1;
   } else if (grid == 1) {
-    tickTarget = 405;
+    tickTarget = 400;
   } else if (grid == 2) {
     tickTarget = 815;
   }
@@ -85,7 +85,7 @@ void rotateRight(double grid) {
   while ((encoderPinRightTicks + encoderPinLeftTicks) / 2 < tickTarget) {
     if (PID_right.Compute()) {
       diffValue = leftRightTicksDiff();
-      powerRight = 0.98 * power - correction;
+      powerRight = power - correction;
       powerLeft =  power + correction;
       if ((encoderPinRightTicks + encoderPinLeftTicks) / 2 + 200 >= tickTarget) {
         powerRight = powerRight / 3.0;
