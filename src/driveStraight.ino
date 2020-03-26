@@ -1,5 +1,5 @@
 void goStraightEX() {
-  double orientation = 3; // negative means left
+  double orientation = 4; // negative means left
   strght_trig++;
   
   //Temporary variable for control system(power)
