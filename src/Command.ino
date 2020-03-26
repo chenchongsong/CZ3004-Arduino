@@ -20,8 +20,8 @@ void executeCommand() {
   } else if (command == 's') {
     // nothing
   } else if ('A' <= command && command <= 'Z') {
+    delay(40);
     goStraightFP(command - 'A' + 1);
-    return;
   } else {
     return;
   }

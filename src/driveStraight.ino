@@ -128,7 +128,7 @@ void goStraightFP(int grid) {
   while ((encoderPinLeftTicks + encoderPinRightTicks) / 2 < distance) {
     if (PID_straightFP.Compute()) {
       diffValue = leftRightTicksDiff();
-      powerRight = 1.02 * power - correction;
+      powerRight = 1.04 * power - correction;
       powerLeft = power + correction;
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
