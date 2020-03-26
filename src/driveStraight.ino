@@ -91,7 +91,7 @@ void goStraightFP(int grid) {
   double powerRight = power;
   double diffValue = 0;
   double correction = 0;
-  double orientation = 0;
+  double orientation = -5;
 
   resetEncoder(); // Clear Tick Counts
 
