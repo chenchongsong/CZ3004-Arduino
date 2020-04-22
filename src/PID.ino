@@ -1,7 +1,6 @@
 // PID essentials
 
-double leftRightTicksDiff()
-{
+double leftRightTicksDiff() {
   disableInterrupt(encoderPinLeft);
   disableInterrupt(encoderPinRight);
 
@@ -12,8 +11,7 @@ double leftRightTicksDiff()
   return ticksDifference;
 }
 
-void resetEncoder()
-{
+void resetEncoder() {
   disableInterrupt(encoderPinLeft);
   disableInterrupt(encoderPinRight);
   encoderPinLeftTicks = 0;
@@ -22,12 +20,10 @@ void resetEncoder()
   enableInterrupt(encoderPinRight, ISREncoderRight_CHANGE, RISING);
 }
 
-void ISREncoderLeft_CHANGE()
-{
+void ISREncoderLeft_CHANGE() {
   encoderPinLeftTicks++;
 }
 
-void ISREncoderRight_CHANGE()
-{
+void ISREncoderRight_CHANGE() {
   encoderPinRightTicks++;
 }

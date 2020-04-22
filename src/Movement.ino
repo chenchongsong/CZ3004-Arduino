@@ -25,7 +25,7 @@ void rotateLeft(int grid) {
   double tickTarget = 0;
 
   resetEncoder(); // Clear Tick Counts
-  if (grid == 0){
+  if (grid == 0){ // for calibration
     tickTarget = 1;
   } else if (grid == 1) {
     tickTarget = 390;
@@ -49,14 +49,8 @@ void rotateLeft(int grid) {
       }
       md.setSpeeds((int)powerRight, -(int)powerLeft);
     }
-    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brake();
-  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  // diffValue = leftRightTicksDiff();
-  // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
-  // Serial.println("OK");
 }
 
 void rotateRight(double grid) {
@@ -69,7 +63,7 @@ void rotateRight(double grid) {
   double tickTarget = 0;
 
   resetEncoder(); // Clear Tick Counts
-  if (grid == 0){
+  if (grid == 0){ // for calibration
     tickTarget = 1;
   } else if (grid == 1) {
     tickTarget = 390;
@@ -93,14 +87,8 @@ void rotateRight(double grid) {
       }
       md.setSpeeds((int)-powerRight, (int)powerLeft);
     }
-    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brake();
-  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  // diffValue = leftRightTicksDiff();
-  // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
-  // Serial.println("OK");
 }
 
 void goBackFP(int grid) {
@@ -119,7 +107,7 @@ void goBackFP(int grid) {
   //Distance
   double distance = 0;
   switch(grid) {
-    case 0: distance = 8; break;
+    case 0: distance = 8; break; // for calibration
     case 1: distance = 297.16; break;
     case 2: distance = 586.68; break;
     case 3: distance = 898.6; break;

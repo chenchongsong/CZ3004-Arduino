@@ -9,50 +9,32 @@ int irsampleSize = 10;
 // LEFT LONG 
 float readIR1() {
   return 4 + 60.374 * pow(map(analogRead(irR1), 0, 1023, 0, 5000) / 1000.0, -1.16) - 0;
-}// 5,10,18,27,37,53,70
+}
 
 // FRONT LEFT
 float readIR2() {
   return 27.728 * pow(map(analogRead(irR2), 0, 1023, 0, 5000) / 1000.0, -1.2045) - 5.9;
-}//5,15,25,35
+}
 
 // FRONT MIDDLE 
 float readIR3() {
   return 27.728 * pow(map(analogRead(irR3), 0, 1023, 0, 5000) / 1000.0, -1.2045) - 2.2;
-}//5,15,24,31
+}
 
 // FRONT RIGHT
 float readIR4() {
   return 27.728 * pow(map(analogRead(irR4), 0, 1023, 0, 5000) / 1000.0, -1.2045) - 6.4;
-}//5,15,25,29
+}
 
 // LEFT
 float readIR5() {
   return 27.728 * pow(map(analogRead(irR5), 0, 1023, 0, 5000) / 1000.0, -1.2045) -5.5;
-}//5,12,23,30
+}
 
 // RIGHT
 float readIR6() {
   return 27.728 * pow(map(analogRead(irR6), 0, 1023, 0, 5000) / 1000.0, -1.2045) -6.5;
-}//5,10,20,30
-
-void checkRawValues (){
- float tmp = readIR1();
- Serial.println("obs:"
-                     +String(readIR2())+ "|"
-                     +String(readIR3())+ "|"
-                     +String(readIR4())
-                     //+String((readIR2() + readIR3() + readIR4()) / 3.)
-                    //  +String(readIR5())+"|"
-                    //  +String(readIR6())
-                );
-        // Serial.println("obs:"+String(median(irArr1,irsampleSize))+"|"
-        //               +String(median(irArr2,irsampleSize))+"|"
-        //               +String(median(irArr3,irsampleSize))+"|"
-        //               +String(median(irArr4,irsampleSize))+"|"
-        //               +String(median(irArr5,irsampleSize))+"|"
-        //               +String(median(irArr6,irsampleSize)));
-  }
+}
 
 //collects samples for ir Array
 void irSamples(int maxnum) {
@@ -112,30 +94,6 @@ float qselect(float A[], int start, int end, int k) {
 
 void sendIRtoPC() {
   irSamples(irsampleSize);
-
-  // filtered reading to return in grids
-  //automated front calibration
-//  if((estShort(median(irArr2, 50))<4 && estShortFR(median(irArr4, irsampleSize))<4) 
-//    ||(estShort(median(irArr2, 50))<4 && estShortFM(median(irArr3, irsampleSize))<4)
-//    ||(estShortFM(median(irArr3, 50))<4 && estShortFR(median(irArr4, irsampleSize)))<4) {
-//       caliFront();
-//    }
-
-
-// cali distance one block
-// float block_dis = 9.5;
-
-// front calidistance to any 1 block in range
-//if(median(irArr2, irsampleSize)<block_dis || 
-//   median(irArr3, irsampleSize)<block_dis || 
-//   median(irArr4, irsampleSize)<block_dis )caliDistance();
-
-// cali right with various blocks within range 70% reliability
-//if(
-//  estShort(median(irArr6, irsampleSize)) == 1 &&
-//  (median(irArr5, irsampleSize)) == 17.5
-//  ) caliRight();
-
   Serial.println("pc:obs:"
     + String(estLong(median(irArr1, irsampleSize))) + "|"
     + String(estShortFL(median(irArr2, irsampleSize))) + "|"

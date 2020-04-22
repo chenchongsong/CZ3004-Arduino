@@ -1,24 +1,3 @@
-// void caliRight() {
-//   bool tried_left = false;
-//   bool tried_right = false;
-//   int cRsamples = 7;
-//   irSamples(cRsamples);
-//   float ir_diff = (median(irArr5,7)) - median(irArr6,7);
-
-//   while (abs(ir_diff) > 0.4 && not(tried_left && tried_right)) {
-//     if (ir_diff < 0.4) {
-//       rotateLeft(0);
-//       tried_left = true;
-//     }
-//     else if (ir_diff > 0.4) {
-//       rotateRight(0);
-//       tried_right = true;
-//     }
-//     irSamples(cRsamples);
-//     ir_diff = (median(irArr5,7)) - median(irArr6,7);
-//   }
-// }
-
 void caliDistance() {
   bool tried_front = false;
   bool tried_back = false;
@@ -28,11 +7,6 @@ void caliDistance() {
   float error = 0.5;
   int cDsamples = 7;
   irSamples(cDsamples);
-  
-  // Serial.println("Prev");
-  // Serial.println(median(irArr2, cDsamples));
-  // Serial.println(median(irArr3, cDsamples));
-  // Serial.println(median(irArr4, cDsamples));
 
   while(((abs(median(irArr2,cDsamples)- dist2) > error) ||
          (abs(median(irArr3,cDsamples)- dist3) > error) ||
@@ -49,26 +23,15 @@ void caliDistance() {
       tried_back = true;
     }
   }
-
-  // Serial.println("After");
-  // Serial.println(median(irArr2, cDsamples));
-  // Serial.println(median(irArr3, cDsamples));
-  // Serial.println(median(irArr4, cDsamples));
-  // Serial.println("");
-
 }
 
 void caliFront() {
   //make robot parallel
   int cFsamples = 7;
   irSamples(cFsamples);
-  // Serial.println("Prev");
-  // Serial.println(median(irArr2, cFsamples));
-  // Serial.println(median(irArr3, cFsamples));
-  // Serial.println(median(irArr4, cFsamples));
 
   float ir_diff = median(irArr2, cFsamples) - median(irArr4, cFsamples);
-  float ideal = 0.6;   // more makes left
+  float ideal = 0.6;   // larger value : left
   bool tried_left = false;
   bool tried_right = false;
 
@@ -78,8 +41,6 @@ void caliFront() {
 
   //using FL and FR from front sensors
   while ((abs(ir_diff - ideal) > 0.2) && not(tried_left && tried_right)) {
-    // Serial.print("diff ");
-    // Serial.println(ir_diff);
     if (ir_diff - ideal < 0) {
       rotateLeft(0);
       tried_left = true;

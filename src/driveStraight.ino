@@ -1,8 +1,7 @@
-void goStraightEX() {
+void goStraightEX() {  // move forward by one grid during exploration phase
   double orientation = 6; // negative means left
-  strght_trig++;
   
-  //Temporary variable for control system(power)
+  //Temporary variables for control system(power)
   double power = 250;
   double rightCoeff = 1.03;
   double powerLeft = power;
@@ -22,7 +21,7 @@ void goStraightEX() {
   PID_straightEX.SetSampleTime(5);
   PID_straightEX.SetOutputLimits(-255, 255);
 
-  md.setSpeeds(0, 200);  // left first
+  md.setSpeeds(0, 200);  // left wheel starts first
   delay(5);
 
   while (encoderPinLeftTicks < distance) {
@@ -41,13 +40,9 @@ void goStraightEX() {
       }
     }
     md.setSpeeds((int)powerRight, (int)powerLeft);
-    // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    // Serial.println("    " + String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeEX();
   diffValue = leftRightTicksDiff();
-  Serial.println("dummy1ex" + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  // Serial.println("    " + String(diffValue) +":dif \n\n");
 
   if (encoderPinLeftTicks > 250.0) return;
 
@@ -76,12 +71,9 @@ void goStraightEX() {
     md.setSpeeds((int)powerRight, (int)powerLeft);
   }
   brakeEX();
-  // Serial.println("After Half Grid Handling");
-  // Serial.println(String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
 }
 
 void goStraightFP(int grid) {
-  strght_trig++;
   
   double power = 380;
   if (grid == 0) {
@@ -140,12 +132,6 @@ void goStraightFP(int grid) {
         readIR4() < 4.7) {
       break;
     }
-    // Serial.println("     " + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-    // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
   }
   brakeFP();
-  // diffValue = leftRightTicksDiff();
-  // Serial.println("     " + String(encoderPinLeftTicks) +" | "+ String(encoderPinRightTicks));
-  // Serial.println(String(diffValue) +":dif | correction:"+ String(correction));
-  // Serial.println("OK");
 }

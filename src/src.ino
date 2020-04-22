@@ -57,7 +57,7 @@ float distanceCMR4;
 float distanceCMR5;
 float distanceCMR6;
 
-// read 50 times and store into int array then it returns the median
+// arrays to store sensor readings
 float irArr1[50];
 float irArr2[50];
 float irArr3[50];
@@ -67,18 +67,12 @@ float irArr6[50];
 
 // For receiving commands from Rpi
 int command;
-int strght_trig = 0;
-int msg_count = 0;
 
 void setup() {
-  //Debug
-  // analogReference(EXTERNAL);
   Serial.begin(9600);
   //Pin Initialization
   pinMode(encoderPinLeft, INPUT);
   pinMode(encoderPinRight, INPUT);
-  // digitalWrite(encoderPinLeft, LOW);
-  // digitalWrite(encoderPinRight, LOW);
   
   md.init();
   pinMode(irR1, INPUT);
